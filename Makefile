@@ -6,13 +6,13 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/02 08:30:53 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/03 21:53:34 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME			= minirt
-INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/
+INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform
 DSYM			= ./minirt.dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
@@ -24,7 +24,13 @@ GLFW_LIB		= ./glfw/build/src
 GLFW_BUILD		= ./glfw/build
 MLX_BUILD		= ./MLX42/build
 NORM_INCLUDE	= ./include
+VPATH			= ./src/vector/:./src/transform
 
+VECTOR_DIR		= ./src/vector/
+VECTOR_OBJ_DIR	= ./obj/vector
+
+TRANSFORM_DIR 		= ./src/transform/
+TRANSFORM_OBJ_DIR	= ./obj/transform
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
 CFLAGS		= -Ofast -march=nocona -flto
@@ -50,24 +56,37 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 # Sources
-SRCS	=	$(wildcard $(SRC_DIR)/*.c)
+VECTOR_SRCS		=	$(wildcard $(VECTOR_DIR)*.c)
+TRANSFORM_SRCS	=	$(wildcard $(TRANSFORM_DIR)*.c)
 
 # Objects
-OBJS	= 	$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
+TRANSFORM_OBJS	= 	$(patsubst $(TRANSFORM_DIR)%.c, $(TRANSFORM_OBJ_DIR)/%.o, $(TRANSFORM_SRCS))
+
+# Dependencies
+DEPS			= $(VECTOR_OBJS)
+DEPS			+= $(TRANSFORM_OBJS)
 
 # Rules
-all:	deps	libft	$(NAME)
+all:	$(NAME)#deps	libft	$(NAME)
 
-$(NAME): $(OBJS) $(MAIN_FILE)| $(OBJ_DIR)
-	@$(CC) $(INCLUDE) $(FRAMEWORK) $(ASAN) $(OBJS) $(MAIN_FILE) -o $@ -lm $(LDLFLAGS) $(LIBFLAGS)
+$(NAME): $(DEPS) $(MAIN_FILE)| $(OBJ_DIR)
+	@$(CC) $(INCLUDE) $(FRAMEWORK) $(ASAN) $(DEPS) $(MAIN_FILE) -o $@ -lm $(LDLFLAGS) $(LIBFLAGS)
 	@echo "$(YELLOW)MiniRT$(DEF_COLOR) $(CYAN)done.$(DEF_COLOR)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(VECTOR_OBJ_DIR)/%.o: $(VECTOR_DIR)/%.c | $(VECTOR_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@ 
+	
+$(TRANSFORM_OBJ_DIR)/%.o: $(TRANSFORM_DIR)/%.c | $(TRANSFORM_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+$(VECTOR_OBJ_DIR):
+	@mkdir -p $(VECTOR_OBJ_DIR)
+
+ $(TRANSFORM_OBJ_DIR):
+	@mkdir -p $(TRANSFORM_OBJ_DIR)
 
 deps:
 	@chmod +x ./install_deps.sh
@@ -83,9 +102,9 @@ libft:
 			@echo "$(YELLOW)MiniRT$(DEF_COLOR) $(CYAN)successfully cleaned!$(DEF_COLOR)"
 
 fclean:		clean
-			@make fclean -C $(LIBFT_FOLDER)
-			@rm -rdf $(GLFW_BUILD)
-			@rm -rdf $(MLX_BUILD)
+#			@make fclean -C $(LIBFT_FOLDER)
+#			@rm -rdf $(GLFW_BUILD)
+#			@rm -rdf $(MLX_BUILD)
 			@$(RM) -f $(NAME)
 			@echo "$(YELLOW)All$(DEF_COLOR) $(CYAN)objects successfully cleaned!$(DEF_COLOR)"
 
