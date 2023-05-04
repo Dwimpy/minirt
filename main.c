@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/03 23:00:08 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/04 18:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
-	t_vec3		a = (t_vec3){.x = 5, .y = 1, .z = 1.5};
+	t_vec3		a = (t_vec3){.x = 3, .y = 2, .z = 4};
 	t_vec3		b = (t_vec3){.x = 2, .y = 1, .z = 1.5};
 
 	printf("x: [%f]\t", vec_add(a, b).x);
@@ -35,7 +35,12 @@ int	main(void)
 	printf("Mag: [%f]\n", vec_magnitude(a));
 	printf("Mag: [%f]\n", vec_magnitude_squared(a));
 	printf("M[1][1]: [%f]\n", identity_matrix().mtx[1][1]);
-	vec_print(vec_normalize(a));
+	vec_print(a);
+	// transform_vector(&a, matrix_multiply(new_transform_rotate_x(M_PI_2).mat, new_transform_rotate_y(M_PI_2).mat));
+	transform_vector(&a, new_transform_rotate_y(M_PI_2).mat);
+	transform_vector(&a, new_transform_rotate_x(M_PI_2).mat);
+	vec_print(a);
+
 	mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "MiniRT", true);
 	image = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	ft_memset(image->pixels, 0x92, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));

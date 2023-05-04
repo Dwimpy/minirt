@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:38:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/03 21:26:51 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/04 15:07:16 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ double inline	vec_magnitude_squared(t_vec3 a)
 
 void inline	vec_print(t_vec3 a)
 {
-	printf("(x, y, z): [%f] [%f] [%f]", a.x, a.y, a.z);
+	printf("(x, y, z): [%f] [%f] [%f]\n", a.x, a.y, a.z);
 }

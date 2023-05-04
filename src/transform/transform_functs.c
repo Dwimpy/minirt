@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:39:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/03 23:00:08 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/04 17:03:49 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 double	to_degrees(float radians)
 {
-	return (radians * (180.0f / PI));
+	return (radians * (180.0f / M_PI));
 }
 
 double	to_radians(float degrees)
 {
-	return (degrees * PI / 180.0f);
+	return (degrees * M_PI / 180.0f);
 }
 
 t_mat4x4	identity_matrix(void)
@@ -28,7 +28,7 @@ t_mat4x4	identity_matrix(void)
 				{1.0f, 0.0f, 0.0f, 0.0f},
 				{0.0f, 1.0f, 0.0f, 0.0f},
 				{0.0f, 0.0f, 1.0f, 0.0f},
-				{0.0f, 0.0f, 0.0f, 0.0f},
+				{0.0f, 0.0f, 0.0f, 1.0f},
 			}}));
 }
 
