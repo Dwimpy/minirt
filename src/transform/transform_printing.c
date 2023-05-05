@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:08:07 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/04 16:42:06 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/05 19:53:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,30 @@ void	print_matrix(t_mat4x4 mat)
 			printf("\t");
 		}
 		count--;
+	}
+}
+
+void	print_matrix_any(double **arr, size_t rows, size_t cols)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < rows)
+	{
+		j = 0;
+		while (j < cols)
+		{
+			printf("%.3f", arr[i][j]);
+			if (j == cols - 1)
+			{
+				printf("\n");
+			}
+			else
+				printf("\t");
+			j++;
+		}
+		i++;
 	}
 }

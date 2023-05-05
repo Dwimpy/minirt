@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:39:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/04 17:03:49 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/05 16:31:48 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_mat4x4	identity_matrix(void)
 			}}));
 }
 
-t_transform	new_transform(void)
+t_transform	new_tf(void)
 {
 	t_transform	transform;
 
@@ -41,11 +41,11 @@ t_transform	new_transform(void)
 	return (transform);
 }
 
-t_transform	new_transform_scale(double a, double b, double c)
+t_transform	tf_scale(double a, double b, double c)
 {
 	t_transform	transform;
 
-	transform = new_transform();
+	transform = new_tf();
 	transform.mat.mtx[0][0] = a;
 	transform.mat.mtx[1][1] = b;
 	transform.mat.mtx[2][2] = c;

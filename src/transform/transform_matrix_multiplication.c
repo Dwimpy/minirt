@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:09:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/04 17:35:03 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/05 16:30:57 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ void	fill_mtx_row(t_mat4x4 *dest, int row, t_mat4x4 a, t_mat4x4 b)
 	b.mtx[1][2] + a.mtx[row][2] * b.mtx[2][2] + a.mtx[row][3] * b.mtx[3][2];
 	dest->mtx[row][3] = a.mtx[row][0] * b.mtx[0][3] + a.mtx[row][1] * \
 	b.mtx[1][3] + a.mtx[row][2] * b.mtx[2][3] + a.mtx[row][3] * b.mtx[3][3];
-
 }
