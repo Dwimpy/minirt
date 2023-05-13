@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
+#    By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/03 21:53:34 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/07 15:43:19 by dwimpy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CC			= cc #-Wall -Werror -Wextra
 CFLAGS		= -Ofast -march=nocona -flto
 ASAN		= #-fsanitize=address -g3
 #CFLAGS		= -Ofast -march=native -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
-FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+#FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 LDLFLAGS	= -L $(LIBFT_FOLDER) -L $(MLX_LIB) -L $(GLFW_LIB)
 LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
 #LDLFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
@@ -68,7 +68,7 @@ DEPS			= $(VECTOR_OBJS)
 DEPS			+= $(TRANSFORM_OBJS)
 
 # Rules
-all:	$(NAME)#deps	libft	$(NAME)
+all:	libft	$(NAME) #deps
 
 $(NAME): $(DEPS) $(MAIN_FILE)| $(OBJ_DIR)
 	@$(CC) $(INCLUDE) $(FRAMEWORK) $(ASAN) $(DEPS) $(MAIN_FILE) -o $@ -lm $(LDLFLAGS) $(LIBFLAGS)

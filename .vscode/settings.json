@@ -2,7 +2,9 @@
 	"C_Cpp.default.includePath": [
 		"/Users/arobu/projects/workdir/minirt/src/vector",
 		"/Users/arobu/projects/workdir/minirt/libft-printf",
-		"/Users/arobu/projects/workdir/minirt/src/transform"
+		"/Users/arobu/projects/workdir/minirt/src/transform",
+		"${default}",
+		"${workspaceFolder}"
 	],
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

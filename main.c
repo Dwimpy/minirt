@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/05 21:20:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/07 19:09:19 by dwimpy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,15 @@ int	main(void)
 		{8, 6, 5, 1},
 		}};
 	t_mat4x4	inverse;
-	printf("x: [%f]\t", vec_add(a, b).x);
-	printf("y: [%f]\t", vec_add(a, b).y);
-	printf("z: [%f]\n", vec_add(a, b).z);
-	printf("x: [%f]\t", vec_cross(a, b).x);
-	printf("y: [%f]\t", vec_cross(a, b).y);
-	printf("z: [%f]\n", vec_cross(a, b).z);
-	printf("Mag: [%f]\n", vec_magnitude(a));
-	printf("Mag: [%f]\n", vec_magnitude_squared(a));
-	printf("M[1][1]: [%f]\n", identity_matrix().mtx[1][1]);
-	vec_print(a);
-	// transform_vector(&a, matrix_multiply(tf_rotate_y(M_PI_2).mat, tf_rotate_x(M_PI_2).mat));
-	print_matrix(tf_rotate_y(M_PI).mat);
-	inverse = matrix_inverse(tf_rotate_x(M_PI).mat, 4);
-	tf_vector(&a, inverse);
-	vec_print(a);
+	transform_vector(&a, matrix_multiply(tf_translate(0,1,1).mat, tf_rotate_x(M_PI).mat));
+	// inverse = matrix_inverse(tf_rotate_x(M_PI).mat, 4);
+	// transform_vector(&a, inverse);
+	// vec_print(a);
 	// print_matrix(inverse);
-	tf_vector(&a, tf_rotate_x(M_PI).mat);
+	// transform_vector(&a, tf_rotate_x(M_PI).mat);
 	vec_print(a);
+	// transform_vector(&a, tf_translate(5, 5, 5).mat);
+	// vec_print(a);
 	mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "MiniRT", true);
 	image = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	ft_memset(image->pixels, 0x92, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   transform_rotate.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:54:40 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/05 20:54:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/08 13:11:16 by dwimpy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "transform.h"
 
-t_transform	inline	tf_rotate_z(double radians)
+inline t_transform	tf_rotate_z(double radians)
 {
 	t_transform	transform;
 	double		cosine;
@@ -27,10 +27,11 @@ t_transform	inline	tf_rotate_z(double radians)
 	transform.mat.mtx[2][1] = sine;
 	transform.mat.mtx[2][2] = cosine;
 	transform.mat.mtx[3][3] = 1.0f;
+	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }
 
-t_transform inline	tf_rotate_y(double radians)
+inline t_transform	tf_rotate_y(double radians)
 {
 	t_transform	transform;
 	double		cosine;
@@ -45,10 +46,11 @@ t_transform inline	tf_rotate_y(double radians)
 	transform.mat.mtx[2][0] = round(-sine);
 	transform.mat.mtx[2][2] = cosine;
 	transform.mat.mtx[3][3] = 1.0f;
+	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }
 
-t_transform inline	tf_rotate_x(double radians)
+inline t_transform	tf_rotate_x(double radians)
 {
 	t_transform	transform;
 	double		cosine;
@@ -62,19 +64,8 @@ t_transform inline	tf_rotate_x(double radians)
 	transform.mat.mtx[1][0] = sine;
 	transform.mat.mtx[1][1] = cosine;
 	transform.mat.mtx[2][2] = 1.0f;
-	transform.mat.mtx[3][3] = 1.0f;
+	transform.mat.mtx[3][3] = 1.0f;	
+	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }
 
-void inline	tf_vector(t_vec3 *vec, t_mat4x4 tf)
-{
-	t_vec3	tmp;
-
-	tmp.x = (vec->x * tf.mtx[0][0] + vec->y * \
-			tf.mtx[0][1] + vec->z * tf.mtx[0][2]);
-	tmp.y = (vec->x * tf.mtx[1][0] + vec->y * \
-			tf.mtx[1][1] + vec->z * tf.mtx[1][2]);
-	tmp.z = (vec->x * tf.mtx[2][0] + vec->y * \
-			tf.mtx[2][1] + vec->z * tf.mtx[2][2]);
-	*vec = tmp;
-}

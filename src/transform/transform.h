@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:36:24 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/05 19:50:44 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/08 13:12:49 by dwimpy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,16 @@ t_mat4x4		matrix_multiply(t_mat4x4 a, t_mat4x4 b);
 
 t_transform		new_tf(void);
 t_transform		tf_scale(double a, double b, double c);
+t_transform		tf_translate(double dx, double dy, double dz);
 t_transform		tf_rotate_x(double radians);
 t_transform		tf_rotate_y(double radians);
 t_transform		tf_rotate_z(double radians);
 
 void			print_matrix(t_mat4x4 mat);
 void			print_matrix_any(double **arr, size_t rows, size_t cols);
-void			tf_vector(t_vec3 *vec, t_mat4x4 tf);
+void			transform_vector(t_vec3 *vec, t_mat4x4 tf);
+void			transform_point(t_vec3 *vec, t_mat4x4 tf);
+
+void			free_aug_matrix(double **mtx, size_t order);
+
 #endif

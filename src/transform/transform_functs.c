@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_functs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:39:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/05 16:31:48 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/07 18:56:36 by dwimpy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,5 @@ t_transform	new_tf(void)
 
 	transform.mat = identity_matrix();
 	transform.inv_mat = transform.mat;
-	return (transform);
-}
-
-t_transform	tf_scale(double a, double b, double c)
-{
-	t_transform	transform;
-
-	transform = new_tf();
-	transform.mat.mtx[0][0] = a;
-	transform.mat.mtx[1][1] = b;
-	transform.mat.mtx[2][2] = c;
-	transform.mat.mtx[3][3] = 1.0f;
 	return (transform);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_matrix_inverse_helpers.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 20:41:15 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/05 21:19:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/07 15:42:07 by dwimpy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ void	interchange_rows(double **mtx, size_t order)
 
 void	replace_row(double **matrix, size_t order)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int		i;
+	int		j;
+	int		k;
 	double	temp;
 
 	i = -1;
-	while (++i < order)
+	while (++i < (int)order)
 	{
 		j = -1;
-		while (++j < order)
+		while (++j < (int)order)
 		{
 			k = -1;
 			if (j != i)
@@ -76,7 +76,7 @@ void	replace_row(double **matrix, size_t order)
 				if (matrix[i][i] == 0)
 					matrix[i][i] = 1e-16;
 				temp = matrix[j][i] / (matrix[i][i]);
-				while (++k < 2 * order)
+				while (++k < 2 * (int)order)
 				{
 					matrix[j][k] -= matrix[i][k] * temp;
 				}
