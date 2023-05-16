@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_matrix_inverse.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:40:33 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/07 14:10:03 by dwimpy           ###   ########.fr       */
+/*   Updated: 2023/05/16 15:41:21 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_mat4x4	matrix_inverse(t_mat4x4 mat, size_t order)
 	aug_mtx = create_augumented_matrix(mat, order);
 	interchange_rows(aug_mtx, order);
 	replace_row(aug_mtx, order);
-	print_matrix_any(aug_mtx, order, 2 * order);
+	// matrix_print_any(aug_mtx, order, 2 * order);
 	finalize_inverse(aug_mtx, order);
 	inverse_mtx = copy_inverse(aug_mtx, order);
 	free_aug_matrix(aug_mtx, order);

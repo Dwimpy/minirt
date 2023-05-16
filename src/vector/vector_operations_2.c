@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operations_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:38:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/07 15:41:03 by dwimpy           ###   ########.fr       */
+/*   Updated: 2023/05/16 15:03:53 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ inline t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 	return ((t_vec3){.x = a.y * b.z - a.z * b.y, \
 					.y = a.z * b.x - a.x * b.z, \
 					.z = a.x * b.y - a.y * b.x});
+}
+
+inline t_vec3	vec_zero(void)
+{
+	return ((t_vec3){.x = 0, .y = 0, .z = 0});
 }
 
 inline t_vec3	vec_normalize(const t_vec3 a)

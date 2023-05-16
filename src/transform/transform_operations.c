@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_operations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:45:29 by dwimpy            #+#    #+#             */
-/*   Updated: 2023/05/08 13:11:25 by dwimpy           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:59:36 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_transform	tf_scale(double a, double b, double c)
 {
 	t_transform	transform;
 
-	transform = new_tf();
+	transform = tf_new();
 	transform.mat.mtx[0][0] = a;
 	transform.mat.mtx[1][1] = b;
 	transform.mat.mtx[2][2] = c;
@@ -29,7 +29,7 @@ t_transform	tf_translate(double dx, double dy, double dz)
 {
 	t_transform	transform;
 
-	transform = new_tf();
+	transform = tf_new();
 	transform.mat.mtx[0][3] = dx;
 	transform.mat.mtx[1][3] = dy;
 	transform.mat.mtx[2][3] = dz;

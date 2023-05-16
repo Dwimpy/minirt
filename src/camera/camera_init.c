@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_functs_helpers.c                         :+:      :+:    :+:   */
+/*   camera_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 19:38:16 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/15 17:00:06 by arobu            ###   ########.fr       */
+/*   Created: 2023/05/16 15:04:55 by arobu             #+#    #+#             */
+/*   Updated: 2023/05/16 15:13:38 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "camera.h"
 #include "transform.h"
 
-t_mat4x4	matrix_empty(void)
+t_camera	new_camera(void)
 {
-	return ((t_mat4x4){
-		.mtx = \
-		{
-			{0.0f, 0.0f, 0.0f, 0.0f},
-			{0.0f, 0.0f, 0.0f, 0.0f},
-			{0.0f, 0.0f, 0.0f, 0.0f},
-			{0.0f, 0.0f, 0.0f, 0.0f}
-		}
-	});
-}
+	t_camera	camera;
 
-void	free_aug_matrix(double **mtx, size_t order)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < order)
-	{
-		free(mtx[i]);
-		i++;
-	}
-	free(mtx);
+	camera.width = 0;
+	camera.height = 0;
+	camera.look_at = vec_zero();
+	camera.forward = vec_zero();
+	camera.right = vec_zero();
+	camera.up = vec_zero();
+	camera.transformation = tf_new();
+	camera.aspect_ratio = 0.0f;
+	camera.h_fov = 0.0f;
+	camera.vertical_fov = 0.0f;
+	return (camera);
 }

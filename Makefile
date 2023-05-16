@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+         #
+#    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/07 15:43:19 by dwimpy           ###   ########.fr        #
+#    Updated: 2023/05/16 13:45:38 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME			= minirt
-INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform
+INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform -I ./src/camera
 DSYM			= ./minirt.dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
@@ -26,17 +26,23 @@ MLX_BUILD		= ./MLX42/build
 NORM_INCLUDE	= ./include
 VPATH			= ./src/vector/:./src/transform
 
+# Modules
+
 VECTOR_DIR		= ./src/vector/
 VECTOR_OBJ_DIR	= ./obj/vector
 
 TRANSFORM_DIR 		= ./src/transform/
 TRANSFORM_OBJ_DIR	= ./obj/transform
+
+CAMERA_DIR		= ./src/camera/
+CAMERA_OBJ_DIR	= ./src/camera
+
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
 CFLAGS		= -Ofast -march=nocona -flto
 ASAN		= #-fsanitize=address -g3
 #CFLAGS		= -Ofast -march=native -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
-#FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 LDLFLAGS	= -L $(LIBFT_FOLDER) -L $(MLX_LIB) -L $(GLFW_LIB)
 LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
 #LDLFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
@@ -58,15 +64,18 @@ WHITE = \033[0;97m
 # Sources
 VECTOR_SRCS		=	$(wildcard $(VECTOR_DIR)*.c)
 TRANSFORM_SRCS	=	$(wildcard $(TRANSFORM_DIR)*.c)
+CAMERA_SRCS		=	$(wildcard $(CAMERA_DIR)*.c)
 
 # Objects
 VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
 TRANSFORM_OBJS	= 	$(patsubst $(TRANSFORM_DIR)%.c, $(TRANSFORM_OBJ_DIR)/%.o, $(TRANSFORM_SRCS))
+CAMERA_OBJS		=	$(patsubst $(CAMERA_DIR)%.c, $(CAMERA_OBJ_DIR)/%.o, $(CAMERA_SRCS))
+
 
 # Dependencies
 DEPS			= $(VECTOR_OBJS)
 DEPS			+= $(TRANSFORM_OBJS)
-
+DEPS			+= $(CAMERA_OBJS)
 # Rules
 all:	libft	$(NAME) #deps
 
@@ -82,11 +91,18 @@ $(TRANSFORM_OBJ_DIR)/%.o: $(TRANSFORM_DIR)/%.c | $(TRANSFORM_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
+$(CAMERA_OBJ_DIR)/%.o: $(CAMERA_DIR)/%.c | $(CAMERA_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
 $(VECTOR_OBJ_DIR):
 	@mkdir -p $(VECTOR_OBJ_DIR)
 
  $(TRANSFORM_OBJ_DIR):
 	@mkdir -p $(TRANSFORM_OBJ_DIR)
+
+ $(CAMERA_OBJ_DIR):
+	@mkdir -p $(CAMERA_OBJ_DIR)
 
 deps:
 	@chmod +x ./install_deps.sh

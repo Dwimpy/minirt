@@ -6,13 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:08:07 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/05 19:53:22 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/15 17:00:35 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "transform.h"
 
-void	print_matrix(t_mat4x4 mat)
+void	matrix_print(t_mat4x4 mat)
 {
 	int	count;
 	int	i;
@@ -39,7 +39,7 @@ void	print_matrix(t_mat4x4 mat)
 	}
 }
 
-void	print_matrix_any(double **arr, size_t rows, size_t cols)
+void	matrix_print_any(double **arr, size_t rows, size_t cols)
 {
 	size_t	i;
 	size_t	j;

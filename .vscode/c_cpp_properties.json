@@ -3,17 +3,14 @@
         {
             "name": "Linux",
             "includePath": [
-                "${default}",
-                "${workspaceFolder}/libft-printf/include",
-                "${workspaceFolder}/src/vector",
-                "${workspaceFolder}/src/transform"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/gcc",
+            "compilerPath": "/usr/bin/clang",
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "linux-gcc-x64",
-            "configurationProvider": "ms-vscode.makefile-tools"
+            "intelliSenseMode": "macos-clang-x64",
+            "configurationProvider": "ms-vscode.cpptools"
         }
     ],
     "version": 4

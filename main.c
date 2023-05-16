@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/07 19:09:19 by dwimpy           ###   ########.fr       */
+/*   Updated: 2023/05/16 15:52:48 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include "vec3.h"
 #include "transform.h"
+#include "camera.h"
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 1024
@@ -32,11 +33,13 @@ int	main(void)
 		{8, 6, 5, 1},
 		}};
 	t_mat4x4	inverse;
-	transform_vector(&a, matrix_multiply(tf_translate(0,1,1).mat, tf_rotate_x(M_PI).mat));
+	// transform_vector(&a, matrix_multiply(tf_translate(0,1,1).mat, tf_rotate_x(M_PI).mat));
 	// inverse = matrix_inverse(tf_rotate_x(M_PI).mat, 4);
-	// transform_vector(&a, inverse);
+	vec_print(a);
+	transform_vector(&a, tf_rotate_z(M_PI / 2).mat);
+	// transform_vector(&a, matrix_inverse(tf_rotate_x(M_PI).mat, 4));
 	// vec_print(a);
-	// print_matrix(inverse);
+	// matrix_print(inverse);
 	// transform_vector(&a, tf_rotate_x(M_PI).mat);
 	vec_print(a);
 	// transform_vector(&a, tf_translate(5, 5, 5).mat);

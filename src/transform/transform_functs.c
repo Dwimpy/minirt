@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_functs.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:39:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/07 18:56:36 by dwimpy           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:59:45 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	to_radians(float degrees)
 	return (degrees * M_PI / 180.0f);
 }
 
-t_mat4x4	identity_matrix(void)
+t_mat4x4	matrix_identity(void)
 {
 	return (((t_mat4x4){.mtx = {
 				{1.0f, 0.0f, 0.0f, 0.0f},
@@ -32,11 +32,11 @@ t_mat4x4	identity_matrix(void)
 			}}));
 }
 
-t_transform	new_tf(void)
+t_transform	tf_new(void)
 {
 	t_transform	transform;
 
-	transform.mat = identity_matrix();
+	transform.mat = matrix_identity();
 	transform.inv_mat = transform.mat;
 	return (transform);
 }
