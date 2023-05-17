@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:27:57 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/16 15:37:57 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/16 17:26:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CAMERA_H
 # include "vec3.h"
 # include "transform.h"
+# include "quaternion.h"
 
 typedef struct s_camera
 {
@@ -24,6 +25,7 @@ typedef struct s_camera
 
 	t_vec3		position;
 	t_transform	transformation;
+	t_euler		orientation;
 
 	int			width;
 	int			height;
@@ -32,6 +34,10 @@ typedef struct s_camera
 	float		vertical_fov;
 }				t_camera;
 
-t_camera	new_camera(void);
+t_camera	cam_new(void);
+void		cam_compute_optics(t_camera *camera);
+void		cam_print(t_camera camera);
+void		cam_set_location(t_camera *camera, t_vec3 location);
+void		cam_set_orientation(t_camera *camera);
 
 #endif

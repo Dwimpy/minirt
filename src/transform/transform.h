@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:36:24 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/16 13:46:03 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/16 17:38:11 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <math.h>
 # include "vec3.h"
 # include "ft_printf.h"
+# include "quaternion.h"
 
 typedef struct s_mat4x4
 {
@@ -46,7 +47,7 @@ void			matrix_print(t_mat4x4 mat);
 void			matrix_print_any(double **arr, size_t rows, size_t cols);
 void			transform_vector(t_vec3 *vec, t_mat4x4 tf);
 void			transform_point(t_vec3 *vec, t_mat4x4 tf);
-
+void			transform_vector_q(t_vec3 *vec, t_quaternion q);
 void			free_aug_matrix(double **mtx, size_t order);
 
 #endif

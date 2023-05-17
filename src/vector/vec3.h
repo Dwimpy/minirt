@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:11:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/16 15:04:03 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/17 16:05:59 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define VEC3_H
 # include <math.h>
 # include <stdio.h>
+# include "logger.h"
+
 
 typedef struct s_vec3
 {
@@ -21,6 +23,8 @@ typedef struct s_vec3
 	double		y;
 	double		z;
 }				t_vec3;
+
+static const t_vec3 g_world_up = (t_vec3){0.0f, 1.0f, 0.0f};
 
 t_vec3	vec_add(t_vec3 a, t_vec3 b);
 t_vec3	vec_scale(double s, t_vec3 a);
@@ -34,5 +38,5 @@ double	vec_magnitude_squared(t_vec3 a);
 double	vec_dot(t_vec3 a, t_vec3 b);
 void	vec_print(t_vec3 a);
 
-
+void	set_vec_comp(t_vec3 *vec, double x, double y, double z);
 #endif

@@ -10,6 +10,27 @@
 	],
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
 	"files.associations": {
-		"ft_printf.h": "c"
-	}
+		"ft_printf.h": "c",
+		"camera.h": "c",
+		"quaternion.h": "c",
+		"string": "cpp",
+		"iosfwd": "cpp",
+		"transform.h": "c",
+		"__functional_base": "c",
+		"__functional_base_03": "c",
+		"__hash_table": "c",
+		"__tuple": "c",
+		"algorithm": "c",
+		"array": "c",
+		"chrono": "c",
+		"type_traits": "c",
+		"functional": "c",
+		"iterator": "c",
+		"limits": "c",
+		"memory": "c",
+		"ratio": "c",
+		"tuple": "c",
+		"utility": "c"
+	},
+	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)"
 }

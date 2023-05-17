@@ -6,13 +6,13 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/16 13:45:38 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/17 15:30:30 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME			= minirt
-INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform -I ./src/camera
+INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform -I ./src/camera -I ./src/quaternion -I ./src/scene -I ./src/logger -I ./src/tester
 DSYM			= ./minirt.dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
@@ -35,7 +35,16 @@ TRANSFORM_DIR 		= ./src/transform/
 TRANSFORM_OBJ_DIR	= ./obj/transform
 
 CAMERA_DIR		= ./src/camera/
-CAMERA_OBJ_DIR	= ./src/camera
+CAMERA_OBJ_DIR	= ./obj/camera
+
+QUATERNION_DIR	= ./src/quaternion/
+QUATERNION_OBJ_DIR	= ./obj/quaternion
+
+LOGGER_DIR		= ./src/logger/
+LOGGER_OBJ_DIR	= ./obj/logger
+
+TESTER_DIR		= ./src/tester/
+TESTER_OBJ_DIR	= ./obj/tester
 
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
@@ -65,17 +74,26 @@ WHITE = \033[0;97m
 VECTOR_SRCS		=	$(wildcard $(VECTOR_DIR)*.c)
 TRANSFORM_SRCS	=	$(wildcard $(TRANSFORM_DIR)*.c)
 CAMERA_SRCS		=	$(wildcard $(CAMERA_DIR)*.c)
+QUATERNION_SRCS	=	$(wildcard $(QUATERNION_DIR)*.c)
+LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)*.c)
+TESTER_SRCS		=	$(wildcard $(TESTER_DIR)*.c)
 
 # Objects
 VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
 TRANSFORM_OBJS	= 	$(patsubst $(TRANSFORM_DIR)%.c, $(TRANSFORM_OBJ_DIR)/%.o, $(TRANSFORM_SRCS))
 CAMERA_OBJS		=	$(patsubst $(CAMERA_DIR)%.c, $(CAMERA_OBJ_DIR)/%.o, $(CAMERA_SRCS))
+QUATERNION_OBJS	=	$(patsubst $(QUATERNION_DIR)%.c, $(QUATERNION_OBJ_DIR)/%.o, $(QUATERNION_SRCS))
+LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRCS))
+TESTER_OBJS		=	$(patsubst $(TESTER_DIR)%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
 
 
 # Dependencies
 DEPS			= $(VECTOR_OBJS)
 DEPS			+= $(TRANSFORM_OBJS)
 DEPS			+= $(CAMERA_OBJS)
+DEPS			+= $(QUATERNION_OBJS)
+DEPS			+= $(LOGGER_OBJS)
+DEPS			+= $(TESTER_OBJS)
 # Rules
 all:	libft	$(NAME) #deps
 
@@ -95,6 +113,18 @@ $(CAMERA_OBJ_DIR)/%.o: $(CAMERA_DIR)/%.c | $(CAMERA_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
+$(QUATERNION_OBJ_DIR)/%.o: $(QUATERNION_DIR)/%.c | $(QUATERNION_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
+$(LOGGER_OBJ_DIR)/%.o: $(LOGGER_DIR)/%.c | $(LOGGER_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
+$(TESTER_OBJ_DIR)/%.o: $(TESTER_DIR)/%.c | $(TESTER_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
 $(VECTOR_OBJ_DIR):
 	@mkdir -p $(VECTOR_OBJ_DIR)
 
@@ -104,10 +134,22 @@ $(VECTOR_OBJ_DIR):
  $(CAMERA_OBJ_DIR):
 	@mkdir -p $(CAMERA_OBJ_DIR)
 
+ $(QUATERNION_OBJ_DIR):
+	@mkdir -p $(QUATERNION_OBJ_DIR)
+
+ $(LOGGER_OBJ_DIR):
+	@mkdir -p $(LOGGER_OBJ_DIR)
+
+ $(TESTER_OBJ_DIR):
+	@mkdir -p $(TESTER_OBJ_DIR)
+
 deps:
 	@chmod +x ./install_deps.sh
 	@echo "$(YELLOW)Installing dependencies..$(DEF_COLOR)"
 	@./install_deps.sh
+
+show:
+	echo $(QUATERNION_OBJS)
 
 libft:
 			@make all -C $(LIBFT_FOLDER) -s
