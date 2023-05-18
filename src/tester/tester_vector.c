@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:54:32 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/17 21:00:25 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/18 02:24:30 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 bool	vector_test_add(t_test_case test, t_test_result *result)
 {
-	INIT_TEST
+	INIT_TEST(t_vec3 *)
 	DESCRIPTION("VecAdd")
 	TEST(vec_add((t_vec3){1.0f, 2.0f, 3.0f}, (t_vec3){4.0f, 5.0f, 6.0f});)
 	TEST_ASSERT(set_vec_comp(ex, 5.0f, 7.0f, 9.0f);)
@@ -29,7 +29,7 @@ bool	vector_test_add(t_test_case test, t_test_result *result)
 
 bool	vector_test_zero(t_test_case test, t_test_result *result)
 {
-	INIT_TEST
+	INIT_TEST(t_vec3 *)
 	DESCRIPTION("VecZero")
 	TEST(vec_zero();)
 	TEST_ASSERT(set_vec_comp(ex, 0.0f, 0.0f, 0.0f);)
@@ -38,7 +38,7 @@ bool	vector_test_zero(t_test_case test, t_test_result *result)
 
 bool	vector_test_scale(t_test_case test, t_test_result *result)
 {
-	INIT_TEST
+	INIT_TEST(t_vec3 *)
 	DESCRIPTION("VecScale")
 	TEST(vec_scale(2.0f, (t_vec3){1.0f, 2.0f, 3.0f});)
 	TEST_ASSERT(set_vec_comp(ex, 2.0f, 4.0f, 6.0f);)
@@ -57,7 +57,7 @@ bool	vector_test_scale(t_test_case test, t_test_result *result)
 
 bool	vector_test_cross(t_test_case test, t_test_result *result)
 {
-	INIT_TEST
+	INIT_TEST(t_vec3 *)
 	DESCRIPTION("VecCross")
 	TEST(vec_cross((t_vec3){1.0f, 0.0f, 0.0f}, (t_vec3){0.0f, 1.0f, 0.0f});)
 	TEST_ASSERT(set_vec_comp(ex, 0.0f, 0.0f, 1.0f);)
@@ -71,6 +71,47 @@ bool	vector_test_cross(t_test_case test, t_test_result *result)
 	TEST_ASSERT(set_vec_comp(ex, -13.0f, 16.0f, 14.0f);)
 	PRINT_ERROR(test, result)
 	return (success);
+}
+
+bool	vector_test_normalize(t_test_case test, t_test_result *result)
+{
+	INIT_TEST(t_vec3 *)
+	DESCRIPTION("VecNormalize")
+	TEST(vec_normalize((t_vec3){0.0f, 0.0f, 0.0f});)
+	TEST_ASSERT(set_vec_comp(ex, 0.0f, 0.0f, 0.0f);)
+	PRINT_ERROR(test, result)
+
+	TEST(vec_normalize((t_vec3){1.0f, 0.0f, 0.0f});)
+	TEST_ASSERT(set_vec_comp(ex, 1.0f, 0.0f, 0.0f);)
+	PRINT_ERROR(test, result)
+
+	TEST(vec_normalize((t_vec3){1.0e-20f, 2e-20f, 3e-20f});)
+	TEST_ASSERT(set_vec_comp(ex, 0.27f, 0.53f, 0.80f);)
+	PRINT_ERROR(test, result)
+	return (success);
+}
+
+bool	vector_test_sub(t_test_case test, t_test_result *result)
+{
+	INIT_TEST(t_vec3 *)
+	DESCRIPTION("VecSubtract")
+	TEST(vec_sub((t_vec3){1.0f, 2.0f, 3.0f}, (t_vec3){4.0f, 5.0f, 6.0f});)
+	TEST_ASSERT(set_vec_comp(ex, -3.0, -3.0, -3.0);)
+	PRINT_ERROR(test, result)
+
+	TEST(vec_sub((t_vec3){-2.5f, 0.0f, 10.5f}, (t_vec3){1.8f, -3.2f, 2.7f});)
+	TEST_ASSERT(set_vec_comp(ex, -4.3, 3.2, 7.8);)
+	PRINT_ERROR(test, result)
+	return (success);
+}
+
+bool	vector_test_magnitude(t_test_case test, t_test_result *result)
+{
+	INIT_TEST(double *)
+	DESCRIPTION("VecMagnitude")
+	TEST(vec_magnitude((t_vec3){3.0f, 4.0f, 0.0f});)
+	TEST_ASSERT_DOUBLE(*ex = 5.0f;)
+	PRINT_ERROR(test, result)
 }
 
 // bool	testcase1(t_test_result *result)

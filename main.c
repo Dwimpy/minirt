@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/17 20:38:55 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/18 01:14:57 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,7 @@ int	main(void)
 	// vec_print(a);
 	t_euler or = (t_euler){0.0f, to_radians(30.0f), 0.0f};
 	index = 0;
-	while (g_tests[index].test_name)
-	{
-		g_tests[index].test_func(g_tests[index], &result);
-		free(result.result);
-		free(result.expected);
-		result.result = NULL;
-		result.expected = NULL;
-		index++;
-	}
+	run_tests(&result);
 	// print_quaternion(eul_to_quat(or));
 	transform_vector_q(&a, eul_to_quat(or));
 	// vec_print(a);

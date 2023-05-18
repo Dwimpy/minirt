@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:38:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/17 18:53:05 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/18 01:25:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ inline t_vec3	vec_normalize(const t_vec3 a)
 	double	len;
 
 	len = vec_magnitude(a);
+	if (len == 0)
+		len = 1e-16;
 	return ((t_vec3){.x = a.x / len, .y = a.y / len, .z = a.z / len});
 }
 
