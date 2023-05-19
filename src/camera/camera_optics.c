@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:07:06 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/16 16:32:33 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/19 16:33:00 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,30 @@ void	cam_compute_optics(t_camera *cam)
 	cam->up = vec_cross(cam->forward, cam->right);
 }
 
+void	cam_compute_matrix(t_camera *cam)
+{
+	t_transform	translate;
+	t_transform	rotate;
+
+	translate = tf_translate(-cam->position.x, \
+				cam->position.y, cam->position.z);
+	rotate = tf_rotate((t_euler){cam->orientation.roll, \
+			cam->orientation.pitch, cam->orientation.yaw});
+	cam->transformation = tf_new();
+	cam->transformation.mat = matrix_multiply(\
+		cam->transformation.mat, translate.mat);
+	cam->transformation.mat = matrix_multiply(\
+		cam->transformation.mat, rotate.mat);
+	cam->transformation.inv_mat = matrix_inverse(cam->transformation.mat, 4);
+	return ;
+}
+
 void	cam_set_location(t_camera *camera, t_vec3 location)
 {
 	camera->position = location;
 }
 
-void	cam_set_orientation(t_camera *camera)
+void	cam_set_orientation(t_camera *camera, t_euler or)
 {
-	return ;
+	camera->orientation = or;
 }

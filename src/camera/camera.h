@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:27:57 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/16 17:26:08 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/19 16:09:39 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_camera	cam_new(void);
 void		cam_compute_optics(t_camera *camera);
 void		cam_print(t_camera camera);
 void		cam_set_location(t_camera *camera, t_vec3 location);
-void		cam_set_orientation(t_camera *camera);
+void		cam_set_orientation(t_camera *camera, t_euler or);
+void		cam_compute_matrix(t_camera *cam);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:11:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/17 16:05:59 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/18 13:24:13 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vec3	vec_normalize(const t_vec3 a);
 t_vec3	vec_zero(void);
 
 double	vec_magnitude(t_vec3 a);
-double	vec_magnitude_squared(t_vec3 a);
+double	vec_magnitude_squared(t_vec3 a);	
 double	vec_dot(t_vec3 a, t_vec3 b);
 void	vec_print(t_vec3 a);
 

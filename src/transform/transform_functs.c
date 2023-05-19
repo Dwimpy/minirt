@@ -6,11 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:39:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/15 16:59:45 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/19 14:22:47 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "transform.h"
+#include "tester.h"
+#include <stdbool.h>
 
 double	to_degrees(float radians)
 {
@@ -39,4 +41,24 @@ t_transform	tf_new(void)
 	transform.mat = matrix_identity();
 	transform.inv_mat = transform.mat;
 	return (transform);
+}
+
+int	are_matrices_equal(t_mat4x4 a, t_mat4x4 b)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (!equals_precision_um(a.mtx[i][j], b.mtx[i][j]))
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
 }

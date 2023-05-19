@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:09:20 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/17 15:10:45 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/18 16:16:20 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ static t_quaternion	get_quaternion(t_conversion_params p)
 void	print_quaternion(t_quaternion q)
 {
 	logger(debug, "Quat: (w, x, y, z):\t ["WHITE("%f")"]["WHITE("%f")"]\
-["WHITE("%f")"]["WHITE("%f")"]\n", q.w, q.x, q.y, q.z);
+["WHITE("%f")"]["WHITE("%f")"]\n", round(q.w), round(q.x), \
+round(q.y), round(q.z));
 }

@@ -32,7 +32,8 @@
 		"tuple": "c",
 		"utility": "c",
 		"tests.h": "c",
-		"tester.h": "c"
+		"tester.h": "c",
+		"stdbool.h": "c"
 	},
 	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)"
 }

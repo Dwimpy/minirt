@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:38:21 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/18 02:20:19 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/19 14:26:46 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,13 @@ void	print_result(t_test_case test, t_test_result result)
 	{
 		logger(regular, RED("Got:")"[%f] \
 "GREEN("Expected:")" [%f]\n", (*(double *)result.result), *(double *)result.expected);
+	}
+	else if (test.module == MATRIX)
+	{
+		logger(regular, RED("Got:\n"));
+		matrix_print(((t_transform *)result.result)->mat);
+		logger(regular, GREEN("Expected:\n"));
+		matrix_print(((t_transform *)result.expected)->mat);
+// [%f]\n", (*(double *)result.result), *(double *)result.expected);
 	}
 }

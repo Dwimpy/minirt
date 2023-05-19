@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/18 01:14:57 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/19 20:53:45 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "camera.h"
 #include "logger.h"
 #include "tests.h"
+#include "ray.h"
+#include "color.h"
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 1024
@@ -62,12 +64,53 @@ int	main(void)
 	t_euler or = (t_euler){0.0f, to_radians(30.0f), 0.0f};
 	index = 0;
 	run_tests(&result);
-	// print_quaternion(eul_to_quat(or));
-	transform_vector_q(&a, eul_to_quat(or));
-	// vec_print(a);
-	mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "MiniRT", true);
-	image = mlx_new_image(mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	ft_memset(image->pixels, 0x92, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(int));
+	camera.aspect_ratio = 16.0f / 9.0f;
+	camera.width = 1200;
+	camera.height = camera.width / camera.aspect_ratio;
+
+	double viewport_w = 2.0f;
+	double viewport_h = viewport_w / camera.aspect_ratio;
+	double focal_len = 1.0f;
+	t_vec3	origin = {0.0f, 0.0f, 0.0f};
+	t_vec3	horizontal = {viewport_w, 0.0f, 0.0f};
+	t_vec3	vertical = {0.0f, viewport_h, 0.0f};
+	t_vec3	left_corner = origin;
+	size_t	i;
+	size_t	j;
+	double	u;
+	double	v;
+
+	left_corner = vec_sub(origin, vec_scale(0.5, horizontal));
+	left_corner = vec_sub(left_corner, vec_scale(0.5, vertical));
+	left_corner = vec_sub(left_corner, (t_vec3){0.0f, 0.0f ,focal_len});
+
+	cam_set_location(&camera, (t_vec3) {0.0f, 0.0f, 0.0f});
+	cam_set_orientation(&camera, (t_euler){0.0f, 0.0f, 0.0f});
+	cam_compute_optics(&camera);
+	cam_compute_matrix(&camera);
+	mlx = mlx_init(camera.width, camera.height, "MiniRT", true);
+	image = mlx_new_image(mlx, camera.width, camera.height);
+	i = 0;
+	j = 0;
+	while (j < camera.height - 1)
+	{
+		i = 0;
+		while (i < camera.width -1)
+		{
+			u = (double)i / (double)(camera.width - 1);
+			v = (double)j / (double)(camera.height - 1);
+			t_vec3 pos = vec_zero();
+			pos = vec_add(left_corner, vec_scale(u, horizontal));
+			pos = vec_add(pos, vec_scale(v, vertical));
+			pos = vec_sub(pos, origin);
+			pos = vec_scale(-1, pos);
+			t_ray ray = create_ray(origin, pos);
+			t_color pc = color_blend(ray);
+			mlx_put_pixel(image, i, j, get_rgba(pc.r * 255, pc.g * 255, pc.b * 255, 0xFF));
+			i++;
+		}
+		j++;
+	}
 	mlx_image_to_window(mlx, image, 0, 0);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

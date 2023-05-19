@@ -6,13 +6,13 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/18 13:16:47 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/19 19:38:54 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME			= minirt
-INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform -I ./src/camera -I ./src/quaternion -I ./src/scene -I ./src/logger -I ./src/tester
+INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform -I ./src/camera -I ./src/quaternion -I ./src/scene -I ./src/logger -I ./src/tester -I ./src/ray -I ./src/color
 DSYM			= ./minirt.dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
@@ -28,24 +28,29 @@ VPATH			= ./src/vector/:./src/transform
 
 # Modules
 
-VECTOR_DIR		= ./src/vector/
+VECTOR_DIR		= ./src/vector
 VECTOR_OBJ_DIR	= ./obj/vector
 
-TRANSFORM_DIR 		= ./src/transform/
+TRANSFORM_DIR 		= ./src/transform
 TRANSFORM_OBJ_DIR	= ./obj/transform
 
-CAMERA_DIR		= ./src/camera/
+CAMERA_DIR		= ./src/camera
 CAMERA_OBJ_DIR	= ./obj/camera
 
-QUATERNION_DIR	= ./src/quaternion/
+QUATERNION_DIR	= ./src/quaternion
 QUATERNION_OBJ_DIR	= ./obj/quaternion
 
-LOGGER_DIR		= ./src/logger/
+LOGGER_DIR		= ./src/logger
 LOGGER_OBJ_DIR	= ./obj/logger
 
-TESTER_DIR		= ./src/tester/
+TESTER_DIR		= ./src/tester
 TESTER_OBJ_DIR	= ./obj/tester
 
+RAY_DIR		= ./src/ray
+RAY_OBJ_DIR	= ./obj/ray
+
+COLOR_DIR		= ./src/color
+COLOR_OBJ_DIR	= ./obj/color
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
 CFLAGS		= -Ofast -march=nocona -flto
@@ -71,20 +76,24 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 # Sources
-VECTOR_SRCS		=	$(wildcard $(VECTOR_DIR)*.c)
-TRANSFORM_SRCS	=	$(wildcard $(TRANSFORM_DIR)*.c)
-CAMERA_SRCS		=	$(wildcard $(CAMERA_DIR)*.c)
-QUATERNION_SRCS	=	$(wildcard $(QUATERNION_DIR)*.c)
-LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)*.c)
-TESTER_SRCS		=	$(wildcard $(TESTER_DIR)*.c)
+VECTOR_SRCS		=	$(wildcard $(VECTOR_DIR)/*.c)
+TRANSFORM_SRCS	=	$(wildcard $(TRANSFORM_DIR)/*.c)
+CAMERA_SRCS		=	$(wildcard $(CAMERA_DIR)/*.c)
+QUATERNION_SRCS	=	$(wildcard $(QUATERNION_DIR)/*.c)
+LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)/*.c)
+TESTER_SRCS		=	$(wildcard $(TESTER_DIR)/*.c)
+RAY_SRCS		=	$(wildcard $(RAY_DIR)/*.c)
+COLOR_SRCS		=	$(wildcard $(COLOR_DIR)/*.c)
 
 # Objects
-VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
-TRANSFORM_OBJS	= 	$(patsubst $(TRANSFORM_DIR)%.c, $(TRANSFORM_OBJ_DIR)/%.o, $(TRANSFORM_SRCS))
-CAMERA_OBJS		=	$(patsubst $(CAMERA_DIR)%.c, $(CAMERA_OBJ_DIR)/%.o, $(CAMERA_SRCS))
-QUATERNION_OBJS	=	$(patsubst $(QUATERNION_DIR)%.c, $(QUATERNION_OBJ_DIR)/%.o, $(QUATERNION_SRCS))
-LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRCS))
-TESTER_OBJS		=	$(patsubst $(TESTER_DIR)%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
+VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)/%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
+TRANSFORM_OBJS	= 	$(patsubst $(TRANSFORM_DIR)/%.c, $(TRANSFORM_OBJ_DIR)/%.o, $(TRANSFORM_SRCS))
+CAMERA_OBJS		=	$(patsubst $(CAMERA_DIR)/%.c, $(CAMERA_OBJ_DIR)/%.o, $(CAMERA_SRCS))
+QUATERNION_OBJS	=	$(patsubst $(QUATERNION_DIR)/%.c, $(QUATERNION_OBJ_DIR)/%.o, $(QUATERNION_SRCS))
+LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)/%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRCS))
+TESTER_OBJS		=	$(patsubst $(TESTER_DIR)/%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
+RAY_OBJS		=	$(patsubst $(RAY_DIR)/%.c, $(RAY_OBJ_DIR)/%.o, $(RAY_SRCS))
+COLOR_OBJS		=	$(patsubst $(COLOR_DIR)/%.c, $(COLOR_OBJ_DIR)/%.o, $(COLOR_SRCS))
 
 
 # Dependencies
@@ -94,6 +103,8 @@ DEPS			+= $(CAMERA_OBJS)
 DEPS			+= $(QUATERNION_OBJS)
 DEPS			+= $(LOGGER_OBJS)
 DEPS			+= $(TESTER_OBJS)
+DEPS			+= $(RAY_OBJS)
+DEPS			+= $(COLOR_OBJS)
 # Rules
 all:	libft	$(NAME) #deps
 
@@ -125,6 +136,14 @@ $(TESTER_OBJ_DIR)/%.o: $(TESTER_DIR)/%.c | $(TESTER_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
+$(RAY_OBJ_DIR)/%.o: $(RAY_DIR)/%.c | $(RAY_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
+$(COLOR_OBJ_DIR)/%.o: $(COLOR_DIR)/%.c | $(COLOR_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
 $(VECTOR_OBJ_DIR):
 	@mkdir -p $(VECTOR_OBJ_DIR)
 
@@ -143,13 +162,19 @@ $(VECTOR_OBJ_DIR):
  $(TESTER_OBJ_DIR):
 	@mkdir -p $(TESTER_OBJ_DIR)
 
+ $(RAY_OBJ_DIR):
+	@mkdir -p $(RAY_OBJ_DIR)
+
+ $(COLOR_OBJ_DIR):
+	@mkdir -p $(COLOR_OBJ_DIR)
+
 deps:
 	@chmod +x ./install_deps.sh
 	@echo "$(YELLOW)Installing dependencies..$(DEF_COLOR)"
 	@./install_deps.sh
 
 show:
-	echo $(QUATERNION_OBJS)
+	echo $(RAY_SRCS)
 
 libft:
 			@make all -C $(LIBFT_FOLDER) -s
