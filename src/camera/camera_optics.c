@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:07:06 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 16:33:00 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/20 17:26:30 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	cam_compute_optics(t_camera *cam)
 		return ;
 	cam->aspect_ratio = (float)cam->width / (float)cam->height;
 	cam->look_at = (t_vec3){0.0f, 0.0f, 1.0f};
-	cam->forward = vec_normalize(cam->look_at);
+	cam->forward = vec_normalize(vec_sub(cam->position, cam->look_at));
 	cam->right = vec_cross(cam->forward, g_world_up);
 	cam->up = vec_cross(cam->forward, cam->right);
 }

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 20:53:45 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/20 19:23:49 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@
 #include "tests.h"
 #include "ray.h"
 #include "color.h"
+#include "sphere.h"
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 1024
 
 int	main(void)
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
-	t_camera	camera;
-	int			index;
+	mlx_t			*mlx;
+	mlx_image_t		*image;
+	t_camera		camera;
+	int				index;
 	t_test_result	result;
 
 	t_vec3		a = (t_vec3){.x = 0.0f, .y = 0.0f, .z = 1.0f};
@@ -61,33 +62,36 @@ int	main(void)
 	// transform_vector(&a, tf_translate(5, 5, 5).mat);
 	// vec_print(a);
 	// vec_print(a);
-	t_euler or = (t_euler){0.0f, to_radians(30.0f), 0.0f};
 	index = 0;
-	run_tests(&result);
+	// run_tests(&result);
 	camera.aspect_ratio = 16.0f / 9.0f;
-	camera.width = 1200;
+	camera.width = 1920;
 	camera.height = camera.width / camera.aspect_ratio;
-
+	cam_set_location(&camera, (t_vec3) {0.0f, 0.0f, -10.0f});
+	cam_set_orientation(&camera, (t_euler){to_radians(0), to_radians(45), 0.0f});
+	cam_compute_matrix(&camera);
 	double viewport_w = 2.0f;
+	cam_compute_optics(&camera);
 	double viewport_h = viewport_w / camera.aspect_ratio;
-	double focal_len = 1.0f;
-	t_vec3	origin = {0.0f, 0.0f, 0.0f};
-	t_vec3	horizontal = {viewport_w, 0.0f, 0.0f};
-	t_vec3	vertical = {0.0f, viewport_h, 0.0f};
-	t_vec3	left_corner = origin;
+	double focus_distance = 10.0f;
+	t_vec3	horizontal = vec_scale(focus_distance, vec_scale(viewport_w, camera.up));
+	t_vec3	vertical = vec_scale(focus_distance, vec_scale(viewport_h, camera.right));
+
+	t_vec3	left_corner = camera.position;
 	size_t	i;
 	size_t	j;
+	t_sphere	sphere;
 	double	u;
 	double	v;
 
-	left_corner = vec_sub(origin, vec_scale(0.5, horizontal));
+	set_vec_comp(&sphere.center, 0.0f, 0.0f, 5.0f);
+	sphere.radius = 1;
+	left_corner = vec_sub(camera.position, vec_scale(0.5, horizontal));
 	left_corner = vec_sub(left_corner, vec_scale(0.5, vertical));
-	left_corner = vec_sub(left_corner, (t_vec3){0.0f, 0.0f ,focal_len});
-
-	cam_set_location(&camera, (t_vec3) {0.0f, 0.0f, 0.0f});
-	cam_set_orientation(&camera, (t_euler){0.0f, 0.0f, 0.0f});
-	cam_compute_optics(&camera);
-	cam_compute_matrix(&camera);
+	left_corner = vec_sub(left_corner, vec_scale(focus_distance, camera.forward));
+	transform_vector(&sphere.center, camera.transformation.mat);
+	// transform_point(&sphere.center, tf_translate(0.4f, 0.4f, +1.0f).mat);
+	vec_print(sphere.center);
 	mlx = mlx_init(camera.width, camera.height, "MiniRT", true);
 	image = mlx_new_image(mlx, camera.width, camera.height);
 	i = 0;
@@ -102,10 +106,9 @@ int	main(void)
 			t_vec3 pos = vec_zero();
 			pos = vec_add(left_corner, vec_scale(u, horizontal));
 			pos = vec_add(pos, vec_scale(v, vertical));
-			pos = vec_sub(pos, origin);
-			pos = vec_scale(-1, pos);
-			t_ray ray = create_ray(origin, pos);
-			t_color pc = color_blend(ray);
+			pos = vec_sub(pos, camera.position);
+			t_ray ray = create_ray(camera.position, pos);
+			t_color pc = color_blend(ray, &sphere);
 			mlx_put_pixel(image, i, j, get_rgba(pc.r * 255, pc.g * 255, pc.b * 255, 0xFF));
 			i++;
 		}

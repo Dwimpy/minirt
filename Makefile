@@ -6,13 +6,27 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/19 19:38:54 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/20 14:12:06 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME			= minirt
-INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ -I ./src/vector/ -I ./src/transform -I ./src/camera -I ./src/quaternion -I ./src/scene -I ./src/logger -I ./src/tester -I ./src/ray -I ./src/color
+
+# Includes
+INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ 
+INCLUDE			+= -I ./src/vector
+INCLUDE			+= -I ./src/transform
+INCLUDE			+= -I ./src/camera
+INCLUDE			+= -I ./src/quaternion 
+INCLUDE			+= -I ./src/scene
+INCLUDE			+= -I ./src/logger
+INCLUDE			+= -I ./src/tester
+INCLUDE			+= -I ./src/ray
+INCLUDE			+= -I ./src/color
+INCLUDE			+= -I ./src/objects/sphere
+
+
 DSYM			= ./minirt.dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
@@ -51,6 +65,12 @@ RAY_OBJ_DIR	= ./obj/ray
 
 COLOR_DIR		= ./src/color
 COLOR_OBJ_DIR	= ./obj/color
+
+# Objects
+
+SPHERE_DIR		= ./src/objects/sphere
+SPHERE_OBJ_DIR	= ./obj/sphere
+
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
 CFLAGS		= -Ofast -march=nocona -flto
@@ -84,6 +104,7 @@ LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)/*.c)
 TESTER_SRCS		=	$(wildcard $(TESTER_DIR)/*.c)
 RAY_SRCS		=	$(wildcard $(RAY_DIR)/*.c)
 COLOR_SRCS		=	$(wildcard $(COLOR_DIR)/*.c)
+SPHERE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
 
 # Objects
 VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)/%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
@@ -94,7 +115,7 @@ LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)/%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRC
 TESTER_OBJS		=	$(patsubst $(TESTER_DIR)/%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
 RAY_OBJS		=	$(patsubst $(RAY_DIR)/%.c, $(RAY_OBJ_DIR)/%.o, $(RAY_SRCS))
 COLOR_OBJS		=	$(patsubst $(COLOR_DIR)/%.c, $(COLOR_OBJ_DIR)/%.o, $(COLOR_SRCS))
-
+SPHERE_OBJS		=	$(patsubst $(SPHERE_DIR)/%.c, $(SPHERE_OBJ_DIR)/%.o, $(SPHERE_SRCS))
 
 # Dependencies
 DEPS			= $(VECTOR_OBJS)
@@ -105,6 +126,7 @@ DEPS			+= $(LOGGER_OBJS)
 DEPS			+= $(TESTER_OBJS)
 DEPS			+= $(RAY_OBJS)
 DEPS			+= $(COLOR_OBJS)
+DEPS			+= $(SPHERE_OBJS)
 # Rules
 all:	libft	$(NAME) #deps
 
@@ -144,6 +166,10 @@ $(COLOR_OBJ_DIR)/%.o: $(COLOR_DIR)/%.c | $(COLOR_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
+$(SPHERE_OBJ_DIR)/%.o: $(SPHERE_DIR)/%.c | $(SPHERE_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
 $(VECTOR_OBJ_DIR):
 	@mkdir -p $(VECTOR_OBJ_DIR)
 
@@ -167,6 +193,9 @@ $(VECTOR_OBJ_DIR):
 
  $(COLOR_OBJ_DIR):
 	@mkdir -p $(COLOR_OBJ_DIR)
+
+ $(SPHERE_OBJ_DIR):
+	@mkdir -p $(SPHERE_OBJ_DIR)
 
 deps:
 	@chmod +x ./install_deps.sh
