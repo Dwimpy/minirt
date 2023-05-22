@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:39:08 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/20 16:20:31 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/22 16:40:40 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ t_color	color_blend(t_ray ray, t_sphere *sphere)
 	double	hit;
 	t_vec3	unit_dir;
 
-	hit = hit_sphere(ray, *sphere);
+	hit = sphere->shape.shape_info->hit(&sphere->shape, &ray);
 	if (hit > 0.0f)
 	{
-		unit_dir = vec_normalize(vec_sub(value_at(&ray, hit), (t_vec3){0.0f, 0.0f, -1.0f}));
+		unit_dir = vec_normalize(vec_sub(value_at(&ray, hit), (t_vec3){0.0f, 0.0f, 1.0f}));
 		return (color_scale(0.5, (t_color){unit_dir.x + 1.0f, unit_dir.y + 1.0f, unit_dir.z + 1.0f}));
 	}
 	dir_norm = vec_normalize(ray.dir);

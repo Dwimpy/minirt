@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_vector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwimpy <dwimpy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:57:51 by dwimpy            #+#    #+#             */
-/*   Updated: 2023/05/07 19:11:51 by dwimpy           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:47:13 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ inline void	transform_vector(t_vec3 *vec, t_mat4x4 tf)
 			tf.mtx[1][1] + vec->z * tf.mtx[1][2]);
 	tmp.z = (vec->x * tf.mtx[2][0] + vec->y * \
 			tf.mtx[2][1] + vec->z * tf.mtx[2][2]);
-	*vec = tmp;
+	vec->x = tmp.x;
+	vec->y = tmp.y;
+	vec->z = tmp.z;
 }
 
 inline void transform_point(t_vec3 *vec, t_mat4x4 tf)

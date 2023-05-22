@@ -6,29 +6,53 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 15:23:07 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/20 19:23:38 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/22 20:01:02 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>	
 #include "sphere.h"
 #include <math.h>
+#include <stdlib.h>
 
-double	hit_sphere(const t_ray ray, t_sphere sphere)
+
+t_sphere	*create_sphere(double radius, t_vec3 center)
 {
-	t_vec3	oc;
-	double	a;
-	double	half_b;
-	double	c;
-	double	disc;
+	t_shape_info	*sphere_info;
+	t_sphere		*sphere;
+	t_sphere_data	*sph_data;
 
-	oc = vec_sub(ray.pos, sphere.center);
-	a = vec_dot(ray.dir, ray.dir);
-	half_b = vec_dot(oc, ray.dir);
-	c = vec_magnitude_squared(oc) - sphere.radius * sphere.radius;
-	disc = half_b * half_b - a * c;
-	if (disc < 0)
-		return (-1.0f);
-	else
-		return ((((-1) * half_b) - sqrt(disc)) / (a));
+	sphere_info = shape_type_create((t_shape_info){
+			sphere_get_name_override,
+			sphere_hit,
+			sphere_destroy_override
+		});
+	sphere = (t_sphere *)shape_create(sphere_info);
+	sph_data = (t_sphere_data *)malloc(sizeof(t_sphere_data));
+	sph_data->center = center;
+	sph_data->radius = radius;
+	sphere->data = sph_data;
+	sphere->shape.shape_data = (t_sphere_data *)sph_data;
+	return (sphere);
 }
+
+t_shape	*sphere_to_shape(t_sphere *sphere)
+{
+	return ((t_shape *)sphere);
+}
+
+t_sphere	*sphere_from_shape(t_shape *shape)
+{
+	if (!shape)
+		return ((t_sphere *) NULL);
+	return ((t_sphere *)shape);
+}
+
+t_sphere_data	*sphere_get_data(t_sphere *self)
+{
+	t_shape	*shape;
+
+	shape = (t_shape *)self;
+	return ((t_sphere_data *) shape_get_data(shape));
+}
+

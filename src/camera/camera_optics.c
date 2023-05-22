@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:07:06 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/20 17:26:30 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/22 19:40:01 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	cam_compute_matrix(t_camera *cam)
 	t_transform	rotate;
 
 	translate = tf_translate(-cam->position.x, \
-				cam->position.y, cam->position.z);
+		cam->position.y, cam->position.z);
 	rotate = tf_rotate((t_euler){cam->orientation.roll, \
-			cam->orientation.pitch, cam->orientation.yaw});
+		cam->orientation.pitch, cam->orientation.yaw});
 	cam->transformation = tf_new();
 	cam->transformation.mat = matrix_multiply(\
 		cam->transformation.mat, translate.mat);

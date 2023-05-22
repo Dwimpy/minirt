@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/20 14:12:06 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/22 14:31:49 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ INCLUDE			+= -I ./src/tester
 INCLUDE			+= -I ./src/ray
 INCLUDE			+= -I ./src/color
 INCLUDE			+= -I ./src/objects/sphere
+INCLUDE			+= -I ./src/objects/shape
 
 
 DSYM			= ./minirt.dSYM
@@ -68,6 +69,9 @@ COLOR_OBJ_DIR	= ./obj/color
 
 # Objects
 
+SHAPE_DIR		= ./src/objects/shape
+SHAPE_OBJ_DIR	= ./obj/shape
+
 SPHERE_DIR		= ./src/objects/sphere
 SPHERE_OBJ_DIR	= ./obj/sphere
 
@@ -104,6 +108,7 @@ LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)/*.c)
 TESTER_SRCS		=	$(wildcard $(TESTER_DIR)/*.c)
 RAY_SRCS		=	$(wildcard $(RAY_DIR)/*.c)
 COLOR_SRCS		=	$(wildcard $(COLOR_DIR)/*.c)
+SHAPE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
 SPHERE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
 
 # Objects
@@ -115,7 +120,8 @@ LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)/%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRC
 TESTER_OBJS		=	$(patsubst $(TESTER_DIR)/%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
 RAY_OBJS		=	$(patsubst $(RAY_DIR)/%.c, $(RAY_OBJ_DIR)/%.o, $(RAY_SRCS))
 COLOR_OBJS		=	$(patsubst $(COLOR_DIR)/%.c, $(COLOR_OBJ_DIR)/%.o, $(COLOR_SRCS))
-SPHERE_OBJS		=	$(patsubst $(SPHERE_DIR)/%.c, $(SPHERE_OBJ_DIR)/%.o, $(SPHERE_SRCS))
+SHAPE_OBJS		=	$(wildcard $(SHAPE_DIR)/*.c)
+SPHERE_OBJS		=	$(patsubst $(SHAPE_DIR)/%.c, $(SHAPE_OBJ_DIR)/%.o, $(SHAPE_SRCS))
 
 # Dependencies
 DEPS			= $(VECTOR_OBJS)
@@ -126,6 +132,7 @@ DEPS			+= $(LOGGER_OBJS)
 DEPS			+= $(TESTER_OBJS)
 DEPS			+= $(RAY_OBJS)
 DEPS			+= $(COLOR_OBJS)
+DEPS			+= $(SHAPE_OBJS)
 DEPS			+= $(SPHERE_OBJS)
 # Rules
 all:	libft	$(NAME) #deps
@@ -166,6 +173,10 @@ $(COLOR_OBJ_DIR)/%.o: $(COLOR_DIR)/%.c | $(COLOR_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
+$(SHAPE_OBJ_DIR)/%.o: $(SHAPE_DIR)/%.c | $(SHAPE_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
 $(SPHERE_OBJ_DIR)/%.o: $(SPHERE_DIR)/%.c | $(SPHERE_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
@@ -193,6 +204,9 @@ $(VECTOR_OBJ_DIR):
 
  $(COLOR_OBJ_DIR):
 	@mkdir -p $(COLOR_OBJ_DIR)
+
+ $(SHAPE_OBJ_DIR):
+	@mkdir -p $(SHAPE_OBJ_DIR)
 
  $(SPHERE_OBJ_DIR):
 	@mkdir -p $(SPHERE_OBJ_DIR)
