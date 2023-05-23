@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:27:57 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 16:09:39 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/23 18:11:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include "vec3.h"
 # include "transform.h"
 # include "quaternion.h"
+
+typedef struct cam_params
+{
+	t_vec3		position;
+	t_vec3		forward;
+}				t_cam_params;
 
 typedef struct s_camera
 {

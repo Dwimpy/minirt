@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:36:24 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 15:58:30 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:34:21 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_mat4x4		quat_to_mat(t_quaternion q);
 t_transform		tf_new(void);
 t_transform		tf_scale(double a, double b, double c);
 t_transform		tf_translate(double dx, double dy, double dz);
+t_transform		tf_scale_uniform(double scale);
 t_transform		tf_rotate(t_euler or);
 t_transform		tf_rotate_x(double radians);
 t_transform		tf_rotate_y(double radians);

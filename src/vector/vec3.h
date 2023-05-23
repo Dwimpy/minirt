@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:11:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/18 13:24:13 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/23 12:14:16 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <math.h>
 # include <stdio.h>
 # include "logger.h"
-
 
 typedef struct s_vec3
 {

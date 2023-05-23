@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:04:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/16 17:26:27 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/23 18:12:10 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_camera	cam_new(void)
 {
 	t_camera	camera;
 
-	camera.width = 0;
-	camera.height = 0;
 	camera.look_at = vec_zero();
 	camera.forward = vec_zero();
 	camera.right = vec_zero();

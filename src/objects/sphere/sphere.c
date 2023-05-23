@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 15:23:07 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/22 20:01:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/23 12:15:50 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "sphere.h"
 #include <math.h>
 #include <stdlib.h>
-
 
 t_sphere	*create_sphere(double radius, t_vec3 center)
 {

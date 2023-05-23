@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:45:29 by dwimpy            #+#    #+#             */
-/*   Updated: 2023/05/15 16:59:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:35:06 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,9 @@ t_mat4x4	transpose_matrix(t_mat4x4 matrix)
 				matrix.mtx[2][3], matrix.mtx[3][3]}
 		}
 		});
+}
+
+t_transform	tf_scale_uniform(double scale)
+{
+	return (tf_scale(scale, scale, scale));
 }

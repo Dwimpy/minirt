@@ -41,7 +41,9 @@
 		"string_view": "c",
 		"unordered_map": "c",
 		"vector": "c",
-		"memory_resource": "c"
+		"memory_resource": "c",
+		"__functional_03": "c"
 	},
-	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)"
+	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)",
+	"editor.renderWhitespace": "selection"
 }

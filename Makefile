@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/22 14:31:49 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/23 14:10:23 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ INCLUDE			+= -I ./src/logger
 INCLUDE			+= -I ./src/tester
 INCLUDE			+= -I ./src/ray
 INCLUDE			+= -I ./src/color
+INCLUDE			+= -I ./src/image
 INCLUDE			+= -I ./src/objects/sphere
 INCLUDE			+= -I ./src/objects/shape
 
@@ -67,6 +68,11 @@ RAY_OBJ_DIR	= ./obj/ray
 COLOR_DIR		= ./src/color
 COLOR_OBJ_DIR	= ./obj/color
 
+# Image
+
+IMAGE_DIR		= ./src/image
+IMAGE_OBJ_DIR	= ./obj/image
+
 # Objects
 
 SHAPE_DIR		= ./src/objects/shape
@@ -108,6 +114,7 @@ LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)/*.c)
 TESTER_SRCS		=	$(wildcard $(TESTER_DIR)/*.c)
 RAY_SRCS		=	$(wildcard $(RAY_DIR)/*.c)
 COLOR_SRCS		=	$(wildcard $(COLOR_DIR)/*.c)
+IMAGE_SRCS		=	$(wildcard $(IMAGE_DIR)/*.c)
 SHAPE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
 SPHERE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
 
@@ -120,6 +127,7 @@ LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)/%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRC
 TESTER_OBJS		=	$(patsubst $(TESTER_DIR)/%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
 RAY_OBJS		=	$(patsubst $(RAY_DIR)/%.c, $(RAY_OBJ_DIR)/%.o, $(RAY_SRCS))
 COLOR_OBJS		=	$(patsubst $(COLOR_DIR)/%.c, $(COLOR_OBJ_DIR)/%.o, $(COLOR_SRCS))
+IMAGE_OBJS		=	$(patsubst $(IMAGE_DIR)/%.c, $(IMAGE_OBJ_DIR)/%.o, $(IMAGE_SRCS))
 SHAPE_OBJS		=	$(wildcard $(SHAPE_DIR)/*.c)
 SPHERE_OBJS		=	$(patsubst $(SHAPE_DIR)/%.c, $(SHAPE_OBJ_DIR)/%.o, $(SHAPE_SRCS))
 
@@ -134,6 +142,7 @@ DEPS			+= $(RAY_OBJS)
 DEPS			+= $(COLOR_OBJS)
 DEPS			+= $(SHAPE_OBJS)
 DEPS			+= $(SPHERE_OBJS)
+DEPS			+= $(IMAGE_OBJS)
 # Rules
 all:	libft	$(NAME) #deps
 
@@ -181,6 +190,10 @@ $(SPHERE_OBJ_DIR)/%.o: $(SPHERE_DIR)/%.c | $(SPHERE_OBJ_DIR)
 	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
 	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
 
+$(IMAGE_OBJ_DIR)/%.o: $(IMAGE_DIR)/%.c | $(IMAGE_OBJ_DIR)
+	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
+	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+
 $(VECTOR_OBJ_DIR):
 	@mkdir -p $(VECTOR_OBJ_DIR)
 
@@ -205,11 +218,15 @@ $(VECTOR_OBJ_DIR):
  $(COLOR_OBJ_DIR):
 	@mkdir -p $(COLOR_OBJ_DIR)
 
+ $(IMAGE_OBJ_DIR):
+	@mkdir -p $(IMAGE_OBJ_DIR)
+
  $(SHAPE_OBJ_DIR):
 	@mkdir -p $(SHAPE_OBJ_DIR)
 
  $(SPHERE_OBJ_DIR):
 	@mkdir -p $(SPHERE_OBJ_DIR)
+
 
 deps:
 	@chmod +x ./install_deps.sh
@@ -217,7 +234,8 @@ deps:
 	@./install_deps.sh
 
 show:
-	echo $(RAY_SRCS)
+	@echo $(IMAGE_SRCS)
+	@echo $(IMAGE_OBJS)
 
 libft:
 			@make all -C $(LIBFT_FOLDER) -s
