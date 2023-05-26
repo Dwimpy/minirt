@@ -6,26 +6,30 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:38:21 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 14:26:46 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:12:51 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 
-void	run_tests(t_test_result *result)
+bool	run_tests(t_test_result *result)
 {
 	size_t	index;
+	bool	success;
 
 	index = 0;
+	success = 1;
 	while (g_tests[index].test_name)
 	{
-		g_tests[index].test_func(g_tests[index], result);
+		if (!g_tests[index].test_func(g_tests[index], result))
+			success = 0;
 		free(result->result);
 		free(result->expected);
 		result->result = NULL;
 		result->expected = NULL;
 		index++;
 	}
+	return (success);
 }
 
 void	print_result(t_test_case test, t_test_result result)

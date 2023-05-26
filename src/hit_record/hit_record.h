@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_helpers.c                                   :+:      :+:    :+:   */
+/*   hit_record.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 15:59:51 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/26 16:16:32 by arobu            ###   ########.fr       */
+/*   Created: 2023/05/26 13:01:19 by arobu             #+#    #+#             */
+/*   Updated: 2023/05/26 13:55:55 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
+#ifndef HIT_RECORD_H
+# define HIT_RECORD_H
+# include "ray.h"
+# include <stdbool.h>
 
-void	set_vec_comp(t_vec3 *vec, double x, double y, double z)
+typedef struct hit_rec
 {
-	vec->x = x;
-	vec->y = y;
-	vec->z = z;
-}
+	t_vec3		isec_point;
+	t_vec3		surf_normal;
+	bool		front_face;
+	double		min_t;
+	double		max_t;
+	double		t;
+}				t_hit_rec;
 
-double	max(double a, double b)
-{
-	if (a < b)
-		return (b);
-	return (a);
-}
+t_hit_rec	new_hit_rec(void);
+void		set_front_face(t_ray *ray, t_hit_rec *hit);
+#endif

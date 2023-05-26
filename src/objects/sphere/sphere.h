@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:08:41 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/22 20:01:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 13:26:04 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "vec3.h"
 # include "ray.h"
 # include "shape.h"
+# include "hit_record.h"
+# include <stdbool.h>
 
 typedef struct s_sphere	t_sphere;
 
@@ -34,7 +36,7 @@ typedef struct s_sphere
 t_shapes	sphere_get_name_override(t_shape *self);
 t_sphere	*create_sphere(double radius, t_vec3 center);
 void		sphere_destroy_override(t_shape *shape);
-double		sphere_hit(t_shape *shape, t_ray *ray);
+bool		sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit);
 t_shape		*sphere_to_shape(t_sphere *sphere);
 t_sphere	*sphere_from_shape(t_shape *shape);
 

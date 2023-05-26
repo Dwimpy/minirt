@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:07:06 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/23 18:11:24 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 22:08:26 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,36 @@
 
 void	cam_compute_optics(t_camera *cam)
 {
+	double	viewport_w ;
+	double	viewport_h;
+	double	focus_distance;
+
 	if (!cam)
 		return ;
-	cam->aspect_ratio = (float)cam->width / (float)cam->height;
-	cam->look_at = (t_vec3){0.0f, 0.0f, 1.0f};
-	cam->forward = vec_normalize(vec_sub(cam->position, cam->look_at));
-	cam->right = vec_cross(cam->forward, g_world_up);
+	viewport_w = 2.0;
+	viewport_h = viewport_w / cam->aspect_ratio;
+	cam->forward = vec_normalize(vec_sub(cam->look_at, cam->position));
+	cam->right = vec_cross(g_world_up, cam->forward);
 	cam->up = vec_cross(cam->forward, cam->right);
+
+	// cam->left_corner = vec_sub(cam->left_corner, \
+	// 	vec_scale(focus_distance, cam->forward));
+}
+
+t_camera	cam_setup(t_cam_params params)
+{
+	t_camera	cam;
+
+	cam = cam_new();
+	cam.aspect_ratio = params.aspect_ratio;
+	cam.vertical_fov = params.fov;
+	set_vec_comp(&cam.look_at, params.look_at.x, params.look_at.y, params.look_at.z);
+	cam_set_location(&cam, params.position);
+	cam_set_orientation(&cam, (t_euler){to_radians(0.0), to_radians(0.0), 0.0});
+	cam_compute_matrix(&cam);
+	cam_compute_optics(&cam);
+	return (cam);
+
 }
 
 void	cam_compute_matrix(t_camera *cam)

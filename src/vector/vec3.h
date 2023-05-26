@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:11:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/23 12:14:16 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:14:43 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_vec3
 	double		z;
 }				t_vec3;
 
-static const t_vec3 g_world_up = (t_vec3){0.0f, 1.0f, 0.0f};
+static const t_vec3 g_world_up = (t_vec3){0.0, 1.0, 0.0};
 
 t_vec3	vec_add(t_vec3 a, t_vec3 b);
 t_vec3	vec_scale(double s, t_vec3 a);
@@ -35,6 +35,7 @@ t_vec3	vec_zero(void);
 double	vec_magnitude(t_vec3 a);
 double	vec_magnitude_squared(t_vec3 a);	
 double	vec_dot(t_vec3 a, t_vec3 b);
+double	max(double a, double b);
 void	vec_print(t_vec3 a);
 
 void	set_vec_comp(t_vec3 *vec, double x, double y, double z);

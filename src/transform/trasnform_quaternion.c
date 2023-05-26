@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 17:28:27 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 15:45:14 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 22:09:54 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,31 @@ t_mat4x4	quat_to_mat(t_quaternion q)
 	const double	sq_qy = q.y * q.y;
 	const double	sq_qz = q.z * q.z;
 	t_mat4x4		mat;
+	double			invs;
 
 	mat = matrix_identity();
-	mat.mtx[0][0] = (1.0f - 2.0f * sq_qy - 2.0f * sq_qz);
-	mat.mtx[1][1] = (1.0f - 2.0f * sq_qx - 2.0f * sq_qz);
-	mat.mtx[2][2] = (1.0f - 2.0f * sq_qx - 2.0f * sq_qy);
-	mat.mtx[0][1] = 2.0f * q.x * q.y - 2.0f * q.z * q.w;
-	mat.mtx[0][2] = 2.0f * q.x * q.z + 2.0f * q.y * q.w;
-	mat.mtx[1][0] = 2.0f * q.x * q.y + 2.0f * q.z * q.w;
-	mat.mtx[1][2] = 2.0f * q.y * q.z - 2.0f * q.x * q.w;
-	mat.mtx[2][0] = 2.0f * q.x * q.z - 2.0f * q.y * q.w;
-	mat.mtx[2][1] = 2.0f * q.y * q.z + 2.0f * q.x * q.w;
+	invs = 1.0 / (sq_qx + sq_qy + sq_qz + sq_qw);
+	mat.mtx[0][0] = (sq_qx - sq_qy - sq_qz + sq_qw) * invs;
+	mat.mtx[1][1] = (-sq_qx + sq_qy - sq_qz + sq_qw) * invs;
+	mat.mtx[2][2] = (-sq_qx - sq_qy + sq_qz + sq_qw) * invs;
+	mat.mtx[0][1] = 2.0f * (q.x * q.y - q.z * q.w) * invs;
+	mat.mtx[0][2] = 2.0f * (q.x * q.z + q.y * q.w) * invs;
+	mat.mtx[1][0] = 2.0f * (q.x * q.y + q.z * q.w) * invs;
+	mat.mtx[1][2] = 2.0f * (q.y * q.z - q.x * q.w) * invs;
+	mat.mtx[2][0] = 2.0f * (q.x * q.z - q.y * q.w) * invs;
+	mat.mtx[2][1] = 2.0f * (q.y * q.z - q.x * q.w) * invs;
 	return (mat);
 }
+	// mtx.mtx[1][0] = 2.0f * ((q.x * q.y) + (q.z * q.w)) * invs;
+	// mtx.mtx[0][1] = 2.0f * ((q.x * q.y) - (q.z * q.w)) * invs;
+	// mtx.mtx[2][0] = 2.0f * ((q.x * q.z) - (q.y * q.w)) * invs;
+	// mtx.mtx[0][2] = 2.0f * ((q.x * q.z) + (q.y * q.w)) * invs;
+	// mtx.mtx[2][1] = 2.0f * ((q.y * q.z) + (q.x * q.w)) * invs;
+	// mtx.mtx[1][2] = 2.0f * ((q.y * q.z) - (q.x * q.w)) * invs;
+
+
+
+
+
+
+

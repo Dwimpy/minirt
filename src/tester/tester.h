@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 15:12:38 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 15:06:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:12:15 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	test_success(bool success);
 
 // Tests
 
-void	run_tests(t_test_result *result);
+bool	run_tests(t_test_result *result);
 bool	vector_test_add(t_test_case test, t_test_result *result);
 bool	vector_test_zero(t_test_case test, t_test_result *result);
 bool	vector_test_scale(t_test_case test, t_test_result *result);

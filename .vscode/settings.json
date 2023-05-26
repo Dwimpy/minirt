@@ -42,7 +42,12 @@
 		"unordered_map": "c",
 		"vector": "c",
 		"memory_resource": "c",
-		"__functional_03": "c"
+		"__functional_03": "c",
+		"__node_handle": "c",
+		"record_hit.h": "c",
+		"hit_record.h": "c",
+		"limits.h": "c",
+		"image.h": "c"
 	},
 	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)",
 	"editor.renderWhitespace": "selection"

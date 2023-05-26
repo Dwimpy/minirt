@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:38:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/19 18:38:35 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 14:27:44 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ inline t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 
 inline t_vec3	vec_zero(void)
 {
-	return ((t_vec3){.x = 0, .y = 0, .z = 0});
+	return ((t_vec3){.x = 0.0, .y = 0.0, .z = 0.0});
 }
 
 inline t_vec3	vec_normalize(const t_vec3 a)

@@ -6,17 +6,20 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 14:58:06 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/22 18:06:54 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:29:29 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHAPE_H
 # define SHAPE_H
 # include "ray.h"
+# include "hit_record.h"
+# include <stdbool.h>
 
 typedef struct s_shape	t_shape;
 typedef enum e_shapes	t_shapes;
-typedef double			(*t_shape_hit)(t_shape *shape, t_ray *ray);
+typedef bool			(*t_shape_hit)(t_shape *shape, \
+	t_ray *ray, t_hit_rec *hit);
 typedef void			(*t_destroy)(t_shape *shape);
 typedef t_shapes		(*t_shape_name)(t_shape *self);
 
