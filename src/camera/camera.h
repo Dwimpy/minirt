@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:27:57 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/26 16:47:13 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/27 20:47:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "quaternion.h"
 # include "ray.h"
 # include "image.h"
+# include "sampler.h"
 
 typedef struct cam_params
 {
@@ -47,7 +48,7 @@ typedef struct s_camera
 
 t_camera	cam_new(void);
 t_camera	cam_setup(t_cam_params params);
-t_ray		cam_get_ray(t_camera *cam, t_image *image, int x, int y);
+t_ray		cam_get_ray(t_camera *cam, t_image *image, int x, int y, t_sampler *sampler);
 void		cam_compute_optics(t_camera *camera);
 void		cam_print(t_camera camera);
 void		cam_set_location(t_camera *camera, t_vec3 location);

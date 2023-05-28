@@ -6,13 +6,17 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/26 13:27:00 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/28 18:57:29 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 NAME			= minirt
 
+VPATH			= ./src/vector ./src/transform ./src/camera ./src/quaternion \
+				  ./src/scene ./src/logger ./src/tester ./src/ray ./src/color \
+				  ./src/image ./src/hit_record ./src/sampler ./src/objects/sphere \
+				  ./src/objects/shape
 # Includes
 INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ 
 INCLUDE			+= -I ./src/vector
@@ -26,6 +30,7 @@ INCLUDE			+= -I ./src/ray
 INCLUDE			+= -I ./src/color
 INCLUDE			+= -I ./src/image
 INCLUDE			+= -I ./src/hit_record
+INCLUDE			+= -I ./src/sampler
 INCLUDE			+= -I ./src/objects/sphere
 INCLUDE			+= -I ./src/objects/shape
 
@@ -44,45 +49,6 @@ NORM_INCLUDE	= ./include
 
 # Modules
 
-VECTOR_DIR		= ./src/vector
-VECTOR_OBJ_DIR	= ./obj/vector
-
-TRANSFORM_DIR 		= ./src/transform
-TRANSFORM_OBJ_DIR	= ./obj/transform
-
-CAMERA_DIR		= ./src/camera
-CAMERA_OBJ_DIR	= ./obj/camera
-
-QUATERNION_DIR	= ./src/quaternion
-QUATERNION_OBJ_DIR	= ./obj/quaternion
-
-LOGGER_DIR		= ./src/logger
-LOGGER_OBJ_DIR	= ./obj/logger
-
-TESTER_DIR		= ./src/tester
-TESTER_OBJ_DIR	= ./obj/tester
-
-RAY_DIR		= ./src/ray
-RAY_OBJ_DIR	= ./obj/ray
-
-COLOR_DIR		= ./src/color
-COLOR_OBJ_DIR	= ./obj/color
-
-# Image
-
-IMAGE_DIR		= ./src/image
-IMAGE_OBJ_DIR	= ./obj/image
-
-# Objects
-
-SHAPE_DIR		= ./src/objects/shape
-SHAPE_OBJ_DIR	= ./obj/shape
-
-SPHERE_DIR		= ./src/objects/sphere
-SPHERE_OBJ_DIR	= ./obj/sphere
-
-REC_HIT_DIR		= ./src/hit_record
-REC_HIT_OBJ_DIR	= ./obj/hit_record
 
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
@@ -109,137 +75,23 @@ CYAN = \033[0;96m
 WHITE = \033[0;97m
 
 # Sources
-VECTOR_SRCS		=	$(wildcard $(VECTOR_DIR)/*.c)
-TRANSFORM_SRCS	=	$(wildcard $(TRANSFORM_DIR)/*.c)
-CAMERA_SRCS		=	$(wildcard $(CAMERA_DIR)/*.c)
-QUATERNION_SRCS	=	$(wildcard $(QUATERNION_DIR)/*.c)
-LOGGER_SRCS		=	$(wildcard $(LOGGER_DIR)/*.c)
-TESTER_SRCS		=	$(wildcard $(TESTER_DIR)/*.c)
-RAY_SRCS		=	$(wildcard $(RAY_DIR)/*.c)
-COLOR_SRCS		=	$(wildcard $(COLOR_DIR)/*.c)
-IMAGE_SRCS		=	$(wildcard $(IMAGE_DIR)/*.c)
-SHAPE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
-SPHERE_SRCS		=	$(wildcard $(SPHERE_DIR)/*.c)
-REC_HIT_SRCS	=	$(wildcard $(REC_HIT_DIR)/*.c)
+SRCS	= $(shell find ./src -name "*.c")
 
 # Objects
-VECTOR_OBJS		= 	$(patsubst $(VECTOR_DIR)/%.c, $(VECTOR_OBJ_DIR)/%.o, $(VECTOR_SRCS))
-TRANSFORM_OBJS	= 	$(patsubst $(TRANSFORM_DIR)/%.c, $(TRANSFORM_OBJ_DIR)/%.o, $(TRANSFORM_SRCS))
-CAMERA_OBJS		=	$(patsubst $(CAMERA_DIR)/%.c, $(CAMERA_OBJ_DIR)/%.o, $(CAMERA_SRCS))
-QUATERNION_OBJS	=	$(patsubst $(QUATERNION_DIR)/%.c, $(QUATERNION_OBJ_DIR)/%.o, $(QUATERNION_SRCS))
-LOGGER_OBJS		=	$(patsubst $(LOGGER_DIR)/%.c, $(LOGGER_OBJ_DIR)/%.o, $(LOGGER_SRCS))
-TESTER_OBJS		=	$(patsubst $(TESTER_DIR)/%.c, $(TESTER_OBJ_DIR)/%.o, $(TESTER_SRCS))
-RAY_OBJS		=	$(patsubst $(RAY_DIR)/%.c, $(RAY_OBJ_DIR)/%.o, $(RAY_SRCS))
-COLOR_OBJS		=	$(patsubst $(COLOR_DIR)/%.c, $(COLOR_OBJ_DIR)/%.o, $(COLOR_SRCS))
-IMAGE_OBJS		=	$(patsubst $(IMAGE_DIR)/%.c, $(IMAGE_OBJ_DIR)/%.o, $(IMAGE_SRCS))
-SHAPE_OBJS		=	$(wildcard $(SHAPE_DIR)/*.c)
-SPHERE_OBJS		=	$(patsubst $(SHAPE_DIR)/%.c, $(SHAPE_OBJ_DIR)/%.o, $(SHAPE_SRCS))
-REC_HIT_OBJS	=	$(patsubst $(REC_HIT_DIR)/%.c, $(REC_HIT_OBJ_DIR)/%.o, $(REC_HIT_SRCS))
+OBJS	= $(addprefix $(OBJ_DIR)/, $(notdir $(SRCS:.c=.o)))
 
-# Dependencies
-DEPS			= $(VECTOR_OBJS)
-DEPS			+= $(TRANSFORM_OBJS)
-DEPS			+= $(CAMERA_OBJS)
-DEPS			+= $(QUATERNION_OBJS)
-DEPS			+= $(LOGGER_OBJS)
-DEPS			+= $(TESTER_OBJS)
-DEPS			+= $(RAY_OBJS)
-DEPS			+= $(COLOR_OBJS)
-DEPS			+= $(SHAPE_OBJS)
-DEPS			+= $(SPHERE_OBJS)
-DEPS			+= $(IMAGE_OBJS)
-DEPS			+= $(REC_HIT_OBJS)
 # Rules
-all:	libft	$(NAME) #deps
-
-$(NAME): $(DEPS) $(MAIN_FILE)| $(OBJ_DIR)
-	@$(CC) $(INCLUDE) $(FRAMEWORK) $(ASAN) $(DEPS) $(MAIN_FILE) -o $@ -lm $(LDLFLAGS) $(LIBFLAGS)
+all: libft	
+	@${MAKE} $(NAME) -j
+$(NAME): $(OBJ_DIR) $(OBJS) $(MAIN_FILE)
+	@$(CC) $(INCLUDE) $(FRAMEWORK) $(ASAN) $(OBJS) $(MAIN_FILE) -o $@ -lm $(LDLFLAGS) $(LIBFLAGS)
 	@echo "$(YELLOW)MiniRT$(DEF_COLOR) $(CYAN)done.$(DEF_COLOR)"
 
-$(VECTOR_OBJ_DIR)/%.o: $(VECTOR_DIR)/%.c | $(VECTOR_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@ 
-	
-$(TRANSFORM_OBJ_DIR)/%.o: $(TRANSFORM_DIR)/%.c | $(TRANSFORM_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c	| $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(CAMERA_OBJ_DIR)/%.o: $(CAMERA_DIR)/%.c | $(CAMERA_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(QUATERNION_OBJ_DIR)/%.o: $(QUATERNION_DIR)/%.c | $(QUATERNION_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(LOGGER_OBJ_DIR)/%.o: $(LOGGER_DIR)/%.c | $(LOGGER_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(TESTER_OBJ_DIR)/%.o: $(TESTER_DIR)/%.c | $(TESTER_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(RAY_OBJ_DIR)/%.o: $(RAY_DIR)/%.c | $(RAY_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(COLOR_OBJ_DIR)/%.o: $(COLOR_DIR)/%.c | $(COLOR_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(REC_HIT_OBJ_DIR)/%.o: $(REC_HIT_DIR)/%.c | $(REC_HIT_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(SHAPE_OBJ_DIR)/%.o: $(SHAPE_DIR)/%.c | $(SHAPE_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(SPHERE_OBJ_DIR)/%.o: $(SPHERE_DIR)/%.c | $(SPHERE_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(IMAGE_OBJ_DIR)/%.o: $(IMAGE_DIR)/%.c | $(IMAGE_OBJ_DIR)
-	@echo "$(MAGENTA)Compiling:$(DEF_COLOR) $<."
-	@$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $@
-
-$(VECTOR_OBJ_DIR):
-	@mkdir -p $(VECTOR_OBJ_DIR)
-
- $(TRANSFORM_OBJ_DIR):
-	@mkdir -p $(TRANSFORM_OBJ_DIR)
-
- $(CAMERA_OBJ_DIR):
-	@mkdir -p $(CAMERA_OBJ_DIR)
-
- $(QUATERNION_OBJ_DIR):
-	@mkdir -p $(QUATERNION_OBJ_DIR)
-
- $(LOGGER_OBJ_DIR):
-	@mkdir -p $(LOGGER_OBJ_DIR)
-
- $(TESTER_OBJ_DIR):
-	@mkdir -p $(TESTER_OBJ_DIR)
-
- $(RAY_OBJ_DIR):
-	@mkdir -p $(RAY_OBJ_DIR)
-
- $(COLOR_OBJ_DIR):
-	@mkdir -p $(COLOR_OBJ_DIR)
-
- $(IMAGE_OBJ_DIR):
-	@mkdir -p $(IMAGE_OBJ_DIR)
-
- $(REC_HIT_OBJ_DIR):
-	@mkdir -p $(REC_HIT_OBJ_DIR)
-
- $(SHAPE_OBJ_DIR):
-	@mkdir -p $(SHAPE_OBJ_DIR)
-
- $(SPHERE_OBJ_DIR):
-	@mkdir -p $(SPHERE_OBJ_DIR)
-
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 deps:
 	@chmod +x ./install_deps.sh
@@ -247,8 +99,7 @@ deps:
 	@./install_deps.sh
 
 show:
-	@echo $(IMAGE_SRCS)
-	@echo $(IMAGE_OBJS)
+	@echo $(OBJS)
 
 libft:
 			@make all -C $(LIBFT_FOLDER) -s

@@ -6,12 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:04:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/26 22:21:08 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/28 17:49:42 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 #include "transform.h"
+#include "sampler.h"
 
 t_camera	cam_new(void)
 {
@@ -29,17 +30,20 @@ t_camera	cam_new(void)
 	return (camera);
 }
 
-t_ray	cam_get_ray(t_camera *cam, t_image *image, int x, int y)
+t_ray	cam_get_ray(t_camera *cam, t_image *image, int x, int y, t_sampler *sampler)
 {
 	t_ray	ray;
 	t_vec3	pix_x;
 	t_vec3	pix_y;
 	float	viewport_x;
 	float	viewport_y;
+	double	rnd_x;
+	double	rnd_y;
 
 	ray.pos = vec_zero();
 	ray.dir = vec_zero();
-	cam->aspect_ratio = 16.0 / 9.0;
+	rnd_x = generate_sample(sampler);
+	rnd_y = generate_sample(sampler);
 	viewport_x = 2.0f * tanf(to_radians(cam->vertical_fov) / 2.0f);
 	viewport_y = viewport_x / cam->aspect_ratio;
 	pix_x = vec_scale(viewport_x / image->width, cam->right);
@@ -47,13 +51,13 @@ t_ray	cam_get_ray(t_camera *cam, t_image *image, int x, int y)
 	ray.dir = vec_add(\
 		cam->forward, \
 		vec_add(\
-		vec_scale(image->width * 0.5 + 0.5 - x, pix_x), \
-		vec_scale(image->height * 0.5 + 0.5 - y, pix_y))
+		vec_scale((double)image->width * 0.5 - x - rnd_x, pix_x), \
+		vec_scale((double)image->height * 0.5 - y - rnd_y, pix_y))
 			);
 	ray.dir = vec_normalize(ray.dir);
 	transform_point(&ray.pos, cam->transformation.mat);
 	transform_vector(&ray.dir, cam->transformation.mat);
-	return (create_ray(cam->position, ray.dir));
+	return (create_ray(ray.pos, ray.dir));
 }
 
 void	cam_print(t_camera camera)

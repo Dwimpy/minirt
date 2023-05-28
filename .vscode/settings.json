@@ -47,7 +47,11 @@
 		"record_hit.h": "c",
 		"hit_record.h": "c",
 		"limits.h": "c",
-		"image.h": "c"
+		"image.h": "c",
+		"ios": "c",
+		"halton.h": "c",
+		"stdlib.h": "c",
+		"sampler.h": "c"
 	},
 	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)",
 	"editor.renderWhitespace": "selection"
