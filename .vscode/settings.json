@@ -51,7 +51,10 @@
 		"ios": "c",
 		"halton.h": "c",
 		"stdlib.h": "c",
-		"sampler.h": "c"
+		"sampler.h": "c",
+		"vec3.h": "c",
+		"ray.h": "c",
+		"color.h": "c"
 	},
 	"codam-norminette-3.highlight-color": "rgba(186,87,255,0.1)",
 	"editor.renderWhitespace": "selection"

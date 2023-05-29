@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/28 18:57:29 by arobu            ###   ########.fr        #
+#    Updated: 2023/05/29 12:36:07 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(MAIN_FILE)
 	@$(CC) $(INCLUDE) $(FRAMEWORK) $(ASAN) $(OBJS) $(MAIN_FILE) -o $@ -lm $(LDLFLAGS) $(LIBFLAGS)
 	@echo "$(YELLOW)MiniRT$(DEF_COLOR) $(CYAN)done.$(DEF_COLOR)"
 
-$(OBJ_DIR)/%.o: %.c	| $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):

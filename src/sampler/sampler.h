@@ -6,13 +6,14 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:12:11 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/28 17:43:35 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/29 15:16:25 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SAMPLER_H
 # define SAMPLER_H
-#include <stdlib.h>
+# include <stdlib.h>
+# include "vec3.h"
 
 typedef union u_rnd_params
 {
@@ -30,6 +31,9 @@ typedef struct sampler
 }			t_sampler;
 
 t_sampler	*new_sampler(int dim);
+t_vec3		generate_unit_sphere(t_sampler *sampler);
+double		double_random(t_sampler *sampler, double min, double max);
+t_vec3		vec_random(t_sampler *sampler, double min, double max);
 uint32_t	hash(uint32_t x);
 void		init_sampler(t_sampler	*sampler, uint32_t seed);
 double		generate_sample(t_sampler *sampler);
