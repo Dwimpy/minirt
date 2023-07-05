@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:39:08 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/29 19:09:57 by arobu            ###   ########.fr       */
+/*   Updated: 2023/07/02 22:20:32 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_color	color_blend(t_ray ray, t_list *list, int depth, t_sampler *sampler)
 	t_vec3		target;
 	t_list		*tmp;
 	int			hit_anything;
-
+	t_ray		scattered;
+	t_color		attenuation;
 	if (depth <= 0)
 		return ((t_color){0.0, 0.0, 0.0});
 	tmp = list;
@@ -55,25 +56,19 @@ t_color	color_blend(t_ray ray, t_list *list, int depth, t_sampler *sampler)
 	}
 	if (hit_anything)
 	{
-		target = vec_add(hit_rec.isec_point, \
-			vec_add(hit_rec.surf_normal, generate_unit_sphere(sampler)));
-		return (color_scale(0.5, color_blend(create_ray(hit_rec.isec_point, \
-			vec_sub(target, hit_rec.isec_point)), list, depth - 1, sampler)));
-		// return (color_scale(0.5, \
-		// color_add((t_color)\
-		// {hit_rec.surf_normal.x, hit_rec.surf_normal.y, hit_rec.surf_normal.z}, \
-		// (t_color){1.0f, 1.0f, 1.0f})));
+			scattered.dir = vec_zero();
+			scattered.pos = vec_zero();
+			if ((hit_rec.material->scatter((t_scatter_params){&ray, &hit_rec, \
+		&attenuation, &scattered, hit_rec.material->refraction_index}, sampler)))
+				return (color_dot(attenuation, color_blend(scattered, list, depth - 1, sampler)));
+			return ((t_color){0.0, 0.0, 0.0});
 	}
 	dir_norm = vec_normalize(ray.dir);
 	t = 0.5 * ((dir_norm.y) + 1.0f);
 	final_color = color_scale(1.0 - t, (t_color){1.0f, 1.0f, 1.0f});
 	final_color = color_add(final_color, \
 		color_scale(t, (t_color){0.5f, 0.7f, 1.0f}));
-	return ((t_color){
-		clamp(final_color.r, 0.0, 0.99999),
-		clamp(final_color.g, 0.0, 0.99999),
-		clamp(final_color.b, 0.0, 0.99999)
-	});
+	return (final_color);
 }
 
 int32_t	get_rgba(int32_t r, int32_t g, int32_t b, int32_t a)

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:11:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/26 16:14:43 by arobu            ###   ########.fr       */
+/*   Updated: 2023/07/02 21:00:57 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_vec3	vec_sub(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 t_vec3	vec_normalize(const t_vec3 a);
 t_vec3	vec_zero(void);
+t_vec3	vec_reflect(t_vec3 vec, t_vec3 normal);
+t_vec3	vec_refract(t_vec3 r, t_vec3 n, double ref_ratio);
 
 double	vec_magnitude(t_vec3 a);
 double	vec_magnitude_squared(t_vec3 a);	
@@ -38,5 +40,6 @@ double	vec_dot(t_vec3 a, t_vec3 b);
 double	max(double a, double b);
 void	vec_print(t_vec3 a);
 
+t_vec3	vec3_lin_comb(double alpha, t_vec3 a, double beta, t_vec3 b);
 void	set_vec_comp(t_vec3 *vec, double x, double y, double z);
 #endif

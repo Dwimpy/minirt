@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/05/29 12:36:07 by arobu            ###   ########.fr        #
+#    Updated: 2023/07/02 20:34:33 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME			= minirt
 VPATH			= ./src/vector ./src/transform ./src/camera ./src/quaternion \
 				  ./src/scene ./src/logger ./src/tester ./src/ray ./src/color \
 				  ./src/image ./src/hit_record ./src/sampler ./src/objects/sphere \
-				  ./src/objects/shape
+				  ./src/objects/shape ./src/materials ./src/objects/cylinder ./src/objects/plane \
+				  ./src/objects/disk
 # Includes
 INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ 
 INCLUDE			+= -I ./src/vector
@@ -33,6 +34,11 @@ INCLUDE			+= -I ./src/hit_record
 INCLUDE			+= -I ./src/sampler
 INCLUDE			+= -I ./src/objects/sphere
 INCLUDE			+= -I ./src/objects/shape
+INCLUDE			+= -I ./src/materials
+INCLUDE			+= -I ./src/objects/cylinder
+INCLUDE			+= -I ./src/objects/disk
+INCLUDE			+= -I ./src/objects/plane
+
 
 
 DSYM			= ./minirt.dSYM

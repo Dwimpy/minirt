@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:42:27 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:47 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/30 18:02:01 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ t_shape	*shape_create(t_shape_info *shape_info)
 	shape->shape_info = shape_info;
 	return (shape);
 }
-
-t_shape_info	*shape_get_name(t_shape	*self)
-{
-	return (self->shape_info);
-}
-
-void	*shape_get_data(t_shape *self)
-{
-	return (self->shape_data);
-}
-
 void	shape_destroy(t_shape *self)
 {
 	if (self)

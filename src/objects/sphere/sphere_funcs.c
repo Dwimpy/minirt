@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:45:03 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/29 19:08:29 by arobu            ###   ########.fr       */
+/*   Updated: 2023/07/02 21:27:10 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ bool	sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
 	double		disc;
 	double		sqrt_disc;
 	double		root;
-	t_hit_rec	new_hit;
 
 	sphere = sphere_from_shape(shape);
 	oc = vec_sub(ray->pos, sphere->data->center);
@@ -59,6 +58,7 @@ bool	sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
 	if (root > hit->t)
 		return (false);
 	hit->t = root;
+	hit->material = &sphere->shape.material;
 	hit->isec_point = value_at(ray, hit->t);
 	hit->surf_normal = vec_sub(hit->isec_point, sphere->data->center);
 	hit->surf_normal = vec_scale(1 / sphere->data->radius, hit->surf_normal);

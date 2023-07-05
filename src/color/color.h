@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:30:43 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/29 17:00:28 by arobu            ###   ########.fr       */
+/*   Updated: 2023/05/30 16:14:59 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define COLOR_H
 # include "MLX42.h"
 # include "ray.h"
-# include "sphere.h"
 # include "sampler.h"
 # include "libft.h"
 
