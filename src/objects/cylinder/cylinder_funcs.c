@@ -19,7 +19,7 @@ t_shapes	cylinder_get_name_override(t_shape *self)
 
 void	cylinder_destroy_override(t_shape *self)
 {
-	t_cylinder *cylinder;
+	t_cylinder	*cylinder;
 
 	cylinder = cyl_from_shape(self);
 	free(self->shape_data);
@@ -27,14 +27,14 @@ void	cylinder_destroy_override(t_shape *self)
 	free(cylinder);
 }
 
-t_shape 	*cyl_to_shape(t_cylinder *cyl)
+t_shape	*cyl_to_shape(t_cylinder *cyl)
 {
 	return ((t_shape *)cyl);
 }
 
-t_cylinder 	*cyl_from_shape(t_shape *shape)
+t_cylinder	*cyl_from_shape(t_shape *shape)
 {
 	if (!shape)
-		return ((t_cylinder *)NULL);
+		return ((t_cylinder *)(NULL));
 	return ((t_cylinder *)shape);
 }

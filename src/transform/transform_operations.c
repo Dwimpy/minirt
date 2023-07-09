@@ -20,7 +20,7 @@ t_transform	tf_scale(double a, double b, double c)
 	transform.mat.mtx[0][0] = a;
 	transform.mat.mtx[1][1] = b;
 	transform.mat.mtx[2][2] = c;
-	transform.mat.mtx[3][3] = 1.0f;
+	transform.mat.mtx[3][3] = 1.0;
 	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tester.h"
 #include "vec3.h"
 
 inline t_vec3	vec_cross(t_vec3 a, t_vec3 b)
@@ -21,7 +22,7 @@ inline t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 
 inline t_vec3	vec_zero(void)
 {
-	return ((t_vec3){.x = 1e-16, .y = 1e-16, .z = 1e-16});
+	return ((t_vec3){.x = 0.0, .y = 0.0, .z = 0.0});
 }
 
 inline t_vec3	vec_normalize(const t_vec3 a)
@@ -29,10 +30,7 @@ inline t_vec3	vec_normalize(const t_vec3 a)
 	double	len;
 
 	len = vec_magnitude(a);
-	if (len > 0.0)
-		return ((t_vec3){.x = a.x / len, .y = a.y / len, .z = a.z / len});
-	else
-		return ((t_vec3){1e-16, 1e-16, 1e-16});
+	return ((t_vec3){.x = a.x / len, .y = a.y / len, .z = a.z / len});
 }
 
 inline double	vec_magnitude_squared(t_vec3 a)
@@ -42,6 +40,12 @@ inline double	vec_magnitude_squared(t_vec3 a)
 
 inline void	vec_print(t_vec3 a)
 {
-	logger(debug, "Vector: (x, y, z):\t ["WHITE("%f")"]\
-["WHITE("%f")"]["WHITE("%f")"]\n", a.x, a.y, a.z);
+	if (double_equals(a.x, 0.0, M_EPSILON))
+		a.x = 0.0;
+	if (double_equals(a.y, 0.0, M_EPSILON))
+		a.y = 0.0;
+	if (double_equals(a.z, 0.0, M_EPSILON))
+		a.z = 0.0;
+	logger(debug, "Vector: (x, y, z):\t [%f] \
+[%f] [%f]\n", a.x, a.y, a.z);
 }

@@ -58,7 +58,7 @@ NORM_INCLUDE	= ./include
 
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
-CFLAGS		= -Ofast -march=nocona -flto
+CFLAGS		=  -march=nocona
 ASAN		= #-fsanitize=address -g3
 #CFLAGS		= -Ofast -march=native -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
 FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit

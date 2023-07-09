@@ -14,23 +14,23 @@
 #include "tester.h"
 #include <stdbool.h>
 
-double	to_degrees(float radians)
+double	to_degrees(double radians)
 {
-	return (radians * (180.0f / M_PI));
+	return (radians * (180.0 / M_PI));
 }
 
-double	to_radians(float degrees)
+double	to_radians(double degrees)
 {
-	return (degrees * M_PI / 180.0f);
+	return (degrees * M_PI / 180.0);
 }
 
 t_mat4x4	matrix_identity(void)
 {
 	return (((t_mat4x4){.mtx = {
-				{1.0f, 0.0f, 0.0f, 0.0f},
-				{0.0f, 1.0f, 0.0f, 0.0f},
-				{0.0f, 0.0f, 1.0f, 0.0f},
-				{0.0f, 0.0f, 0.0f, 1.0f},
+				{1.0, 0.0, 0.0, 0.0},
+				{0.0, 1.0, 0.0, 0.0},
+				{0.0, 0.0, 1.0, 0.0},
+				{0.0, 0.0, 0.0, 1.0},
 			}}));
 }
 

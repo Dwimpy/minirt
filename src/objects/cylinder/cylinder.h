@@ -14,9 +14,9 @@
 #ifndef CYLINDER_H
 # define CYLINDER_H
 
-#include "vec3.h"
-#include "shape.h"
-#include "ray.h"
+# include "vec3.h"
+# include "shape.h"
+# include "ray.h"
 
 typedef struct s_cylinder_data{
 	t_vec3		center;
@@ -36,9 +36,11 @@ void		cylinder_destroy_override(t_shape *self);
 bool		cylinder_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit);
 t_shape		*cyl_to_shape(t_cylinder *cyl);
 t_cylinder	*cyl_from_shape(t_shape *shape);
-double		get_quadratic_term(t_cylinder *cyl, t_ray *ray);
-double		get_linear_term(t_cylinder *cyl, t_ray *ray, t_vec3 oc);
-double		get_constant_term(t_cylinder *cyl, t_vec3 oc);
-
+double		get_quadratic_term(t_vec3 r_dir, t_vec3 cyl_axis);
+double		get_linear_term(t_vec3 oc, t_vec3 r_dir, t_vec3 cyl_axis);
+double		get_constant_term(t_vec3 oc, t_vec3 r_dir, t_cylinder *cyl);
+bool		get_intersection_root(double a, double b, double c, t_hit_rec *hit);
+t_vec3		cyl_normal_at(t_cylinder *cyl, t_ray *ray, \
+							t_vec3 oc, t_hit_rec *hit);
 
 #endif

@@ -74,7 +74,7 @@ void	replace_row(double **matrix, size_t order)
 			if (j != i)
 			{
 				if (matrix[i][i] == 0)
-					matrix[i][i] = 1e-16;
+					matrix[i][i] = M_EPSILON;
 				temp = matrix[j][i] / (matrix[i][i]);
 				while (++k < 2 * (int)order)
 				{

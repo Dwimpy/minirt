@@ -44,7 +44,7 @@ bool plane_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit) {
 
 	plane = plane_from_shape(shape);
 	aligned = vec_dot(plane->data->axis, ray->dir);
-	if (fabs(aligned) < 1e-6)
+	if (fabs(aligned) < M_EPSILON)
 		return (false);
 	pc = vec_sub(plane->data->origin, ray->pos);
 	root = vec_dot(pc, plane->data->axis) / aligned;

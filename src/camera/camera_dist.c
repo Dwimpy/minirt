@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_functs.c                                     :+:      :+:    :+:   */
+/*   camera_dist.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 20:06:36 by arobu             #+#    #+#             */
-/*   Updated: 2023/05/29 13:52:25 by arobu            ###   ########.fr       */
+/*   Created: 2023/07/09 18:43:08 by arobu             #+#    #+#             */
+/*   Updated: 2023/07/09 18:43:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
+#include "camera.h"
 
-t_color	color_zero(void)
+static inline double	sign(double v)
 {
-	t_color	color;
-
-	color.r = M_EPSILON;
-	color.b = M_EPSILON;
-	color.g = M_EPSILON;
-	return (color);
+	if (v >= 0.0)
+		return (1.0);
+	return (-1.0);
 }
 
-t_color	color_sqrt(t_color color)
+static inline double	triangle_dist(double v)
 {
-	return ((t_color){sqrt(color.r), sqrt(color.g), sqrt(color.b)});
+	double		value;
+
+	value = v * 2.0 - 1.0;
+	v = value / sqrt(fabs(value));
+	v = clamp(v, -1.0, 1.0);
+	return (v - sign(value));
 }

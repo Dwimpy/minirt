@@ -13,6 +13,7 @@
 #ifndef SAMPLER_H
 # define SAMPLER_H
 # include <stdlib.h>
+# include <stdint.h>
 # include "vec3.h"
 
 typedef union u_rnd_params

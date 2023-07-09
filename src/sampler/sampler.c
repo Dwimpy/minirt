@@ -56,7 +56,7 @@ void	init_sampler(t_sampler	*sampler, uint32_t seed)
 	sampler->rnd_unit = generate_uniform_number(seed);
 	if (sampler->curr_pass == UINT32_MAX)
 		sampler->curr_pass = 1;
-	if (sampler->curr_prime == INT32_MAX)
+	if (sampler->curr_prime == UINT32_MAX)
 		sampler->curr_prime = 0;
 	sampler->curr_pass += 1;
 	sampler->curr_prime = 0;

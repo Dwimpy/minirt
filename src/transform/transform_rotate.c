@@ -30,12 +30,12 @@ inline t_transform	tf_rotate_x(double radians)
 	cosine = cos(radians);
 	sine = sin(radians);
 	transform = tf_new();
-	transform.mat.mtx[0][0] = 1.0f;
+	transform.mat.mtx[0][0] = 1.0;
 	transform.mat.mtx[1][1] = cosine;
 	transform.mat.mtx[1][2] = -sine;
 	transform.mat.mtx[2][1] = sine;
 	transform.mat.mtx[2][2] = cosine;
-	transform.mat.mtx[3][3] = 1.0f;
+	transform.mat.mtx[3][3] = 1.0;
 	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }
@@ -51,10 +51,10 @@ inline t_transform	tf_rotate_y(double radians)
 	transform = tf_new();
 	transform.mat.mtx[0][0] = cosine;
 	transform.mat.mtx[0][2] = sine;
-	transform.mat.mtx[1][1] = 1.0f;
+	transform.mat.mtx[1][1] = 1.0;
 	transform.mat.mtx[2][0] = -sine;
 	transform.mat.mtx[2][2] = cosine;
-	transform.mat.mtx[3][3] = 1.0f;
+	transform.mat.mtx[3][3] = 1.0;
 	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }
@@ -72,8 +72,8 @@ inline t_transform	tf_rotate_z(double radians)
 	transform.mat.mtx[0][1] = -sine;
 	transform.mat.mtx[1][0] = sine;
 	transform.mat.mtx[1][1] = cosine;
-	transform.mat.mtx[2][2] = 1.0f;
-	transform.mat.mtx[3][3] = 1.0f;
+	transform.mat.mtx[2][2] = 1.0;
+	transform.mat.mtx[3][3] = 1.0;
 	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }

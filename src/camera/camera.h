@@ -41,14 +41,15 @@ typedef struct s_camera
 	t_transform	transformation;
 	t_euler		orientation;
 
-	float		aspect_ratio;
-	float		h_fov;
-	float		vertical_fov;
+	double		aspect_ratio;
+	double		h_fov;
+	double		vertical_fov;
 }				t_camera;
 
 t_camera	cam_new(void);
 t_camera	cam_setup(t_cam_params params);
-t_ray		cam_get_ray(t_camera *cam, t_image *image, int x, int y, t_sampler *sampler);
+t_ray		cam_get_ray(t_camera *cam, t_image *image, \
+				t_coords pix, t_sampler *sampler);
 void		cam_compute_optics(t_camera *camera);
 void		cam_print(t_camera camera);
 void		cam_set_location(t_camera *camera, t_vec3 location);

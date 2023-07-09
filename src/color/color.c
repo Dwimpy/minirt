@@ -64,10 +64,10 @@ t_color	color_blend(t_ray ray, t_list *list, int depth, t_sampler *sampler)
 			return ((t_color){0.0, 0.0, 0.0});
 	}
 	dir_norm = vec_normalize(ray.dir);
-	t = 0.5 * ((dir_norm.y) + 1.0f);
-	final_color = color_scale(1.0 - t, (t_color){1.0f, 1.0f, 1.0f});
+	t = 0.5 * ((dir_norm.y) + 1.0);
+	final_color = color_scale(1.0 - t, (t_color){1.0, 1.0, 1.0});
 	final_color = color_add(final_color, \
-		color_scale(t, (t_color){0.5f, 0.7f, 1.0f}));
+		color_scale(t, (t_color){0.5, 0.7, 1.0}));
 	return (final_color);
 }
 

@@ -45,7 +45,7 @@ bool disk_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit) {
 
 	disk = disk_from_shape(shape);
 	aligned = vec_dot(disk->data->axis, ray->dir);
-	if (fabs(aligned) < 1e-6)
+	if (fabs(aligned) < M_EPSILON)
 		return false;
 
 	pc = vec_sub(disk->data->origin, ray->pos);

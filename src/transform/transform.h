@@ -29,8 +29,8 @@ typedef struct s_transform
 }				t_transform;
 
 int				are_matrices_equal(t_mat4x4 a, t_mat4x4 b);
-double			to_degrees(float radians);
-double			to_radians(float degrees);
+double			to_degrees(double radians);
+double			to_radians(double degrees);
 
 t_mat4x4		matrix_empty(void);
 t_mat4x4		matrix_identity(void);

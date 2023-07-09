@@ -58,7 +58,7 @@ static inline double	radical_inverse(int pass, int base)
 		pass /= base;
 		fraction *= inv_base;
 	}
-	return (min(res, 0.99999999997));
+	return (min(res, 0.999999));
 }
 
 void	destroy_sampler(t_sampler *sampler)

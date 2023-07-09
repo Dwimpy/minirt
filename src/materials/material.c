@@ -53,9 +53,9 @@ bool	scatter_lambertian(t_scatter_params params, t_sampler *sampler)
 
 	scatter_dir = vec_add(params.hit->surf_normal, \
 		vec_normalize(generate_unit_sphere(sampler)));
-	if (fabs(scatter_dir.x) < 1e-8 || \
-		fabs(scatter_dir.y) < 1e-8 || \
-		fabs(scatter_dir.z) < 1e-8)
+	if (fabs(scatter_dir.x) < M_EPSILON || \
+		fabs(scatter_dir.y) < M_EPSILON || \
+		fabs(scatter_dir.z) < M_EPSILON)
 		scatter_dir = params.hit->surf_normal;
 	*params.scattered = create_ray(params.hit->isec_point, scatter_dir);
 	*params.attenuation = params.hit->material->albedo;
@@ -89,7 +89,7 @@ bool	scatter_glass(t_scatter_params params, t_sampler *sampler)
 	else
 		refraction_ratio = params.ref_index;
 	norm_dir = vec_normalize(params.ray->dir);
-	c_angle = fmin(vec_dot(vec_scale(-1, norm_dir), params.hit->surf_normal), 1.0);
+	c_angle = fmin(vec_dot(vec_scale(-1.0, norm_dir), params.hit->surf_normal), 1.0);
 	s_angle = sqrt(1.0 - c_angle * c_angle);
 	cannot_refract = (refraction_ratio * s_angle) > 1.0;
 	if (cannot_refract || \
@@ -107,7 +107,7 @@ static double reflectance(double cosine, double refraction_index)
 {
 	double	reflectance;
 
-	reflectance = (1 - refraction_index) / (1 + refraction_index);
+	reflectance = (1.0 - refraction_index) / (1.0 + refraction_index);
 	reflectance = reflectance * reflectance;
-	return (reflectance + (1 - reflectance) * pow((1 - cosine), 5));
+	return (reflectance + (1.0 - reflectance) * pow((1.0 - cosine), 5.0));
 }
