@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/07/03 15:38:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/07/11 00:01:27 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 1024
-#define SPP 2.0
+#define SPP 32.0
 int	main(void)
 {
 	t_image			*image;
@@ -73,10 +73,10 @@ int	main(void)
 			3.0
 	}, lambertian((t_color) {0.0, 0.0, 1.0}));
 	cyl = create_cylinder((t_cylinder_data){
-			(t_vec3) {0.0, 505, 5.0},
-			(t_vec3) {1.0, 0.0, 0.0},
+			(t_vec3) {0.0, 508, 3.0},
+			(t_vec3) {0.0, 0.0, -1.0},
 			3.0,
-			1.0
+			4.0
 	}, lambertian((t_color){0.7, 0.3, 0.3}));
 	vec_print(sphere4->data->center);
 	list = ft_lstnew(cyl);

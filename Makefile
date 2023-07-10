@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/07/02 20:34:33 by arobu            ###   ########.fr        #
+#    Updated: 2023/07/10 22:42:10 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,10 +61,10 @@ CC			= cc #-Wall -Werror -Wextra
 CFLAGS		=  -march=nocona
 ASAN		= #-fsanitize=address -g3
 #CFLAGS		= -Ofast -march=native -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
-FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+#FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 LDLFLAGS	= -L $(LIBFT_FOLDER) -L $(MLX_LIB) -L $(GLFW_LIB)
-LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
-#LDLFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
+#LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
+LIBFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
 
 #Archive and Remove
 RM			= rm -f

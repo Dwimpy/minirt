@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 17:57:58 by arobu             #+#    #+#             */
-/*   Updated: 2023/07/09 17:57:59 by arobu            ###   ########.fr       */
+/*   Updated: 2023/07/10 23:23:04 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ double	get_constant_term(t_vec3 oc, t_vec3 r_dir, t_cylinder *cyl)
 			cyl->data->radius * cyl->data->radius);
 }
 
-bool	get_intersection_root(double a, double b, double c, t_hit_rec *hit)
+bool	get_intersection_root(double a, double b, double c, double t[2])
 {
 	double	disc;
 	double	sqrt_disc;
@@ -44,15 +44,7 @@ bool	get_intersection_root(double a, double b, double c, t_hit_rec *hit)
 	if (disc < 0.0)
 		return (false);
 	sqrt_disc = sqrt(disc);
-	root = (-b - sqrt_disc) / (2 * a);
-	if (root < hit->min_t || hit->max_t < root)
-	{
-		root = (-b + sqrt_disc) / (2 * a);
-		if (root < hit->min_t || hit->max_t < root)
-			return (false);
-	}
-	if (root > hit->max_t)
-		return (false);
-	hit->t = root;
+	t[0] = (-b - sqrt_disc) / (2 * a);
+	t[1] = (-b + sqrt_disc) / (2 * a);
 	return (true);
 }
