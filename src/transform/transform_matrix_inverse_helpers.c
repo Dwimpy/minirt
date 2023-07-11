@@ -12,21 +12,18 @@
 
 #include "transform.h"
 
-double	**create_augumented_matrix(t_mat4x4 mat, size_t order)
-{
-	size_t		i;
-	size_t		j;
-	double		**matrix;
+double **create_augumented_matrix(t_mat4x4 mat, size_t order) {
+	size_t i;
+	size_t j;
+	double **matrix;
 
 	i = 0;
 	j = 0;
 	matrix = ft_calloc(order, sizeof(*matrix));
-	while (i < order)
-	{
+	while (i < order) {
 		j = 0;
 		matrix[i] = ft_calloc(2 * order, sizeof(**matrix));
-		while (j < 2 * order)
-		{
+		while (j < 2 * order) {
 			if (j == i + order)
 				matrix[i][j] = 1;
 			else if (j < order)
@@ -39,16 +36,13 @@ double	**create_augumented_matrix(t_mat4x4 mat, size_t order)
 	return (matrix);
 }
 
-void	interchange_rows(double **mtx, size_t order)
-{
-	size_t	i;
-	double	*tmp_arr;
+void interchange_rows(double **mtx, size_t order) {
+	size_t i;
+	double *tmp_arr;
 
 	i = order - 1;
-	while (i > 0)
-	{
-		if (mtx[i - 1][0] < mtx[i][0])
-		{
+	while (i > 0) {
+		if (mtx[i - 1][0] < mtx[i][0]) {
 			tmp_arr = mtx[i];
 			mtx[i] = mtx[i - 1];
 			mtx[i - 1] = tmp_arr;
@@ -57,27 +51,22 @@ void	interchange_rows(double **mtx, size_t order)
 	}
 }
 
-void	replace_row(double **matrix, size_t order)
-{
-	int		i;
-	int		j;
-	int		k;
-	double	temp;
+void replace_row(double **matrix, size_t order) {
+	int i;
+	int j;
+	int k;
+	double temp;
 
 	i = -1;
-	while (++i < (int)order)
-	{
+	while (++i < (int) order) {
 		j = -1;
-		while (++j < (int)order)
-		{
+		while (++j < (int) order) {
 			k = -1;
-			if (j != i)
-			{
+			if (j != i) {
 				if (matrix[i][i] == 0)
 					matrix[i][i] = M_EPSILON;
 				temp = matrix[j][i] / (matrix[i][i]);
-				while (++k < 2 * (int)order)
-				{
+				while (++k < 2 * (int) order) {
 					matrix[j][k] -= matrix[i][k] * temp;
 				}
 			}
@@ -85,20 +74,17 @@ void	replace_row(double **matrix, size_t order)
 	}
 }
 
-void	finalize_inverse(double **mtx, size_t order)
-{
-	size_t	i;
-	size_t	j;
-	double	tmp;
+void finalize_inverse(double **mtx, size_t order) {
+	size_t i;
+	size_t j;
+	double tmp;
 
 	i = 0;
 	tmp = 0;
-	while (i < order)
-	{
+	while (i < order) {
 		tmp = mtx[i][i];
 		j = 0;
-		while (j < 2 * order)
-		{
+		while (j < 2 * order) {
 			mtx[i][j] = mtx[i][j] / tmp;
 			j++;
 		}
@@ -106,18 +92,15 @@ void	finalize_inverse(double **mtx, size_t order)
 	}
 }
 
-t_mat4x4	copy_inverse(double **mat, size_t order)
-{
-	return ((t_mat4x4){
-		.mtx = \
-		{
-			{mat[0][order], mat[0][order + 1], \
-			mat[0][order + 2], mat[0][order + 3]},
-			{mat[1][order], mat[1][order + 1], \
-			mat[1][order + 2], mat[1][order + 3]},
-			{mat[2][order], mat[2][order + 1], \
-			mat[2][order + 2], mat[2][order + 3]},
-			{mat[3][order], mat[3][order + 1], \
-			mat[3][order + 2], mat[3][order + 3]},
-		}});
+t_mat4x4 copy_inverse(double **mat, size_t order) {
+	return ((t_mat4x4) {.mtx = {
+		{mat[0][order], mat[0][order + 1], mat[0][order + 2],
+		 mat[0][order + 3]},
+		{mat[1][order], mat[1][order + 1], mat[1][order + 2],
+		 mat[1][order + 3]},
+		{mat[2][order], mat[2][order + 1], mat[2][order + 2],
+		 mat[2][order + 3]},
+		{mat[3][order], mat[3][order + 1], mat[3][order + 2],
+		 mat[3][order + 3]},
+	}});
 }

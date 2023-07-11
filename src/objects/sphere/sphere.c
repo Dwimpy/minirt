@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>	
 #include "sphere.h"
 #include "vec3.h"
 #include <math.h>
+#include <stdbool.h>
 #include <stdlib.h>
 
 t_sphere *create_sphere(double radius, t_vec3 center, t_material material) {
@@ -22,10 +22,7 @@ t_sphere *create_sphere(double radius, t_vec3 center, t_material material) {
 	t_sphere_data *sph_data;
 
 	sphere_info = shape_type_create((t_shape_info) {
-			sphere_get_name_override,
-			sphere_hit,
-			sphere_destroy_override
-	});
+		sphere_get_name_override, sphere_hit, sphere_destroy_override});
 	sphere = (t_sphere *) shape_create(sphere_info);
 	sph_data = (t_sphere_data *) malloc(sizeof(t_sphere_data));
 	sph_data->center = center;

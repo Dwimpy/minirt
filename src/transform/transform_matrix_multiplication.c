@@ -12,11 +12,10 @@
 
 #include "transform.h"
 
-void	fill_mtx_row(t_mat4x4 *dest, int row, t_mat4x4 a, t_mat4x4 b);
+void fill_mtx_row(t_mat4x4 *dest, int row, t_mat4x4 a, t_mat4x4 b);
 
-t_mat4x4	matrix_multiply(t_mat4x4 a, t_mat4x4 b)
-{
-	t_mat4x4	mult;
+t_mat4x4 matrix_multiply(t_mat4x4 a, t_mat4x4 b) {
+	t_mat4x4 mult;
 
 	fill_mtx_row(&mult, 0, a, b);
 	fill_mtx_row(&mult, 1, a, b);
@@ -25,14 +24,17 @@ t_mat4x4	matrix_multiply(t_mat4x4 a, t_mat4x4 b)
 	return (mult);
 }
 
-void	fill_mtx_row(t_mat4x4 *dest, int row, t_mat4x4 a, t_mat4x4 b)
-{
-	dest->mtx[row][0] = a.mtx[row][0] * b.mtx[0][0] + a.mtx[row][1] * \
-	b.mtx[1][0] + a.mtx[row][2] * b.mtx[2][0] + a.mtx[row][3] * b.mtx[3][0];
-	dest->mtx[row][1] = a.mtx[row][0] * b.mtx[0][1] + a.mtx[row][1] * \
-	b.mtx[1][1] + a.mtx[row][2] * b.mtx[2][1] + a.mtx[row][3] * b.mtx[3][1];
-	dest->mtx[row][2] = a.mtx[row][0] * b.mtx[0][2] + a.mtx[row][1] * \
-	b.mtx[1][2] + a.mtx[row][2] * b.mtx[2][2] + a.mtx[row][3] * b.mtx[3][2];
-	dest->mtx[row][3] = a.mtx[row][0] * b.mtx[0][3] + a.mtx[row][1] * \
-	b.mtx[1][3] + a.mtx[row][2] * b.mtx[2][3] + a.mtx[row][3] * b.mtx[3][3];
+void fill_mtx_row(t_mat4x4 *dest, int row, t_mat4x4 a, t_mat4x4 b) {
+	dest->mtx[row][0] = a.mtx[row][0] * b.mtx[0][0] +
+		a.mtx[row][1] * b.mtx[1][0] +
+		a.mtx[row][2] * b.mtx[2][0] + a.mtx[row][3] * b.mtx[3][0];
+	dest->mtx[row][1] = a.mtx[row][0] * b.mtx[0][1] +
+		a.mtx[row][1] * b.mtx[1][1] +
+		a.mtx[row][2] * b.mtx[2][1] + a.mtx[row][3] * b.mtx[3][1];
+	dest->mtx[row][2] = a.mtx[row][0] * b.mtx[0][2] +
+		a.mtx[row][1] * b.mtx[1][2] +
+		a.mtx[row][2] * b.mtx[2][2] + a.mtx[row][3] * b.mtx[3][2];
+	dest->mtx[row][3] = a.mtx[row][0] * b.mtx[0][3] +
+		a.mtx[row][1] * b.mtx[1][3] +
+		a.mtx[row][2] * b.mtx[2][3] + a.mtx[row][3] * b.mtx[3][3];
 }

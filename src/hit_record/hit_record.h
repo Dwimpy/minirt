@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 #ifndef HIT_RECORD_H
-# define HIT_RECORD_H
-# include "ray.h"
-# include <stdbool.h>
+#define HIT_RECORD_H
+#include "ray.h"
+#include <stdbool.h>
 
-typedef struct material	t_material;
+typedef struct material t_material;
 
-typedef struct hit_rec
-{
-	t_vec3		isec_point;
-	t_vec3		surf_normal;
-	t_material	*material;
-	bool		front_face;
-	double		min_t;
-	double		max_t;
-	double		t;
-}				t_hit_rec;
+typedef struct hit_rec {
+	t_vec3 isec_point;
+	t_vec3 surf_normal;
+	t_material *material;
+	bool front_face;
+	double min_t;
+	double max_t;
+	double t;
+} t_hit_rec;
 
-t_hit_rec	new_hit_rec(void);
-void		set_front_face(t_ray *ray, t_hit_rec *hit);
+t_hit_rec new_hit_rec(void);
+void set_front_face(t_ray *ray, t_hit_rec *hit);
 #endif

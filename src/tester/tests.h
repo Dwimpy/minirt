@@ -12,7 +12,7 @@
 
 #include "tester.h"
 
-static const t_test_case	g_tests[] = {
+static const t_test_case g_tests[] = {
 	{"Addition::vec_add", VECTOR, vector_test_add},
 	{"VecZero::vec_zero", VECTOR, vector_test_zero},
 	{"VecScale::vec_scale", VECTOR, vector_test_scale},
@@ -32,5 +32,4 @@ static const t_test_case	g_tests[] = {
 	{"TransformMarix::matrix_identity", MATRIX, tf_matrix_test_identity},
 	{"TransformMarix::matrix_inverse", MATRIX, tf_matrix_test_inverse},
 	{"TransformMarix::matrix_multiply", MATRIX, tf_matrix_test_multiply},
-	{NULL, NONE, NULL}
-};
+	{NULL, NONE, NULL}};

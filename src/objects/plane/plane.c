@@ -22,10 +22,7 @@ t_plane *create_plane(t_plane_data data, t_material material) {
 	t_plane_data *plane_data;
 
 	plane_info = shape_type_create((t_shape_info) {
-			plane_get_name_override,
-			plane_hit,
-			plane_destroy_override
-	});
+		plane_get_name_override, plane_hit, plane_destroy_override});
 	plane = (t_plane *) shape_create(plane_info);
 	plane_data = (t_plane_data *) malloc(sizeof(t_plane_data));
 	*plane_data = data;

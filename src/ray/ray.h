@@ -11,17 +11,23 @@
 /* ************************************************************************** */
 
 #ifndef RAY_H
-# define RAY_H
+#define RAY_H
 
-# include "vec3.h"
+#include "vec3.h"
 
-typedef struct s_ray
-{
-	t_vec3		pos;
-	t_vec3		dir;
-}				t_ray;
+typedef struct s_ray {
+	t_vec3 pos;
+	t_vec3 dir;
+} t_ray;
 
-t_ray	create_ray(t_vec3 pos, t_vec3 dir);
-t_vec3	value_at(t_ray *ray, double t);
+t_ray
+create_ray(
+	t_vec3 pos,
+	t_vec3 dir);
+
+t_vec3
+value_at(
+	t_ray *ray,
+	double t);
 
 #endif

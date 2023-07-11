@@ -12,24 +12,35 @@
 
 #include "vec3.h"
 
-t_vec3	vec_project(t_vec3 vector, t_vec3 axis)
-{
-	t_vec3	projection;
-	double	magnitude_squared;
+t_vec3
+vec_project(
+	t_vec3 vector,
+	t_vec3 axis) {
+	t_vec3 projection;
+	double magnitude_squared;
 
-	magnitude_squared = vec_magnitude_squared(axis);
-	if (magnitude_squared < M_EPSILON)
+	magnitude_squared = vec_magnitude_squared(
+		axis);
+	if (magnitude_squared <
+		M_EPSILON)
 		return (vec_zero());
-
-	projection = vec_scale(vec_dot(vector, axis) / magnitude_squared, axis);
+	projection = vec_scale(
+		vec_dot(vector,
+				axis) /
+			magnitude_squared,
+		axis);
 	return (projection);
 }
 
-inline double	clamp(double x, double min, double max)
-{
-	if (x < min)
+inline double
+clamp(double x,
+	  double min,
+	  double max) {
+	if (x <
+		min)
 		return (min);
-	if (x > max)
+	if (x >
+		max)
 		return (max);
 	return (x);
 }

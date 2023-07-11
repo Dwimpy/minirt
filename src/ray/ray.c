@@ -12,16 +12,24 @@
 
 #include "ray.h"
 
-t_ray	create_ray(t_vec3 pos, t_vec3 dir)
-{
-	t_ray	ray;
+t_ray
+create_ray(
+	t_vec3 pos,
+	t_vec3 dir) {
+	t_ray ray;
 
 	ray.dir = dir;
 	ray.pos = pos;
 	return (ray);
 }
 
-t_vec3	value_at(t_ray *ray, double t)
-{
-	return (vec_add(ray->pos, vec_scale(t, ray->dir)));
+t_vec3
+value_at(
+	t_ray *ray,
+	double t) {
+	return (vec_add(
+		ray->pos,
+		vec_scale(
+			t,
+			ray->dir)));
 }

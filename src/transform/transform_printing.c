@@ -12,26 +12,21 @@
 
 #include "transform.h"
 
-void	matrix_print(t_mat4x4 mat)
-{
-	int	count;
-	int	i;
-	int	j;
+void matrix_print(t_mat4x4 mat) {
+	int count;
+	int i;
+	int j;
 
 	count = 15;
 	i = 0;
 	j = 0;
-	while (count >= 0)
-	{
+	while (count >= 0) {
 		printf("%.3f", mat.mtx[i][j]);
-		if (count % 4 == 0)
-		{
+		if (count % 4 == 0) {
 			j = 0;
 			i++;
 			printf("\n");
-		}
-		else
-		{
+		} else {
 			j++;
 			printf("\t");
 		}
@@ -39,24 +34,19 @@ void	matrix_print(t_mat4x4 mat)
 	}
 }
 
-void	matrix_print_any(double **arr, size_t rows, size_t cols)
-{
-	size_t	i;
-	size_t	j;
+void matrix_print_any(double **arr, size_t rows, size_t cols) {
+	size_t i;
+	size_t j;
 
 	i = 0;
 	j = 0;
-	while (i < rows)
-	{
+	while (i < rows) {
 		j = 0;
-		while (j < cols)
-		{
+		while (j < cols) {
 			printf("%.3f", arr[i][j]);
-			if (j == cols - 1)
-			{
+			if (j == cols - 1) {
 				printf("\n");
-			}
-			else
+			} else
 				printf("\t");
 			j++;
 		}

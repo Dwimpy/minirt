@@ -12,26 +12,18 @@
 
 #include "transform.h"
 
-t_mat4x4	matrix_empty(void)
-{
-	return ((t_mat4x4){
-		.mtx = \
-		{
-			{0.0f, 0.0f, 0.0f, 0.0f},
-			{0.0f, 0.0f, 0.0f, 0.0f},
-			{0.0f, 0.0f, 0.0f, 0.0f},
-			{0.0f, 0.0f, 0.0f, 0.0f}
-		}
-	});
+t_mat4x4 matrix_empty(void) {
+	return ((t_mat4x4) {.mtx = {{0.0f, 0.0f, 0.0f, 0.0f},
+								{0.0f, 0.0f, 0.0f, 0.0f},
+								{0.0f, 0.0f, 0.0f, 0.0f},
+								{0.0f, 0.0f, 0.0f, 0.0f}}});
 }
 
-void	free_aug_matrix(double **mtx, size_t order)
-{
-	size_t	i;
+void free_aug_matrix(double **mtx, size_t order) {
+	size_t i;
 
 	i = 0;
-	while (i < order)
-	{
+	while (i < order) {
 		free(mtx[i]);
 		i++;
 	}

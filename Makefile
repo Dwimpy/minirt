@@ -17,7 +17,7 @@ VPATH			= ./src/vector ./src/transform ./src/camera ./src/quaternion \
 				  ./src/scene ./src/logger ./src/tester ./src/ray ./src/color \
 				  ./src/image ./src/hit_record ./src/sampler ./src/objects/sphere \
 				  ./src/objects/shape ./src/materials ./src/objects/cylinder ./src/objects/plane \
-				  ./src/objects/disk
+				  ./src/objects/disk ./src/objects/rect
 # Includes
 INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ 
 INCLUDE			+= -I ./src/vector
@@ -38,7 +38,7 @@ INCLUDE			+= -I ./src/materials
 INCLUDE			+= -I ./src/objects/cylinder
 INCLUDE			+= -I ./src/objects/disk
 INCLUDE			+= -I ./src/objects/plane
-
+INCLUDE			+= -I ./src/objects/rect
 
 
 DSYM			= ./minirt.dSYM
@@ -58,13 +58,13 @@ NORM_INCLUDE	= ./include
 
 # Compiler
 CC			= cc #-Wall -Werror -Wextra
-CFLAGS		=  -march=nocona
+#CFLAGS		=  -march=nocona
 ASAN		= #-fsanitize=address -g3
-#CFLAGS		= -Ofast -march=native -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
-#FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+CFLAGS		= -Ofast -march=nocona -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
+FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 LDLFLAGS	= -L $(LIBFT_FOLDER) -L $(MLX_LIB) -L $(GLFW_LIB)
-#LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
-LIBFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
+LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
+#LIBFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
 
 #Archive and Remove
 RM			= rm -f

@@ -11,14 +11,12 @@
 /* ************************************************************************** */
 
 #ifndef SCENE_H
-# define SCENE_H
-# include "camera.h"
+#define SCENE_H
 
+#include "camera.h"
 
-
-typedef struct s_scene
-{
-	t_camera	camera;
-}				t_scene;
+typedef struct s_scene {
+	t_camera camera;
+} t_scene;
 
 #endif

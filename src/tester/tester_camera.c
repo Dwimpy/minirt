@@ -12,7 +12,9 @@
 
 #include "tests.h"
 
-bool	camera_test_position(t_test_case test, t_test_result *result)
-{
+bool
+camera_test_position(
+	t_test_case test,
+	t_test_result *result) {
 	return (true);
 }

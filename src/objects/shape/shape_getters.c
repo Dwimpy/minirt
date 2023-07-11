@@ -12,17 +12,8 @@
 
 #include "shape.h"
 
-t_shape_info	*shape_get_info(t_shape	*self)
-{
-	return (self->shape_info);
-}
+t_shape_info *shape_get_info(t_shape *self) { return (self->shape_info); }
 
-t_material	*shape_get_material(t_shape *self)
-{
-	return (&self->material);
-}
+t_material *shape_get_material(t_shape *self) { return (&self->material); }
 
-void	*shape_get_data(t_shape *self)
-{
-	return (self->shape_data);
-}
+void *shape_get_data(t_shape *self) { return (self->shape_data); }

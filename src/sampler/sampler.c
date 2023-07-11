@@ -11,26 +11,24 @@
 /* ************************************************************************** */
 
 #include "sampler.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-static inline int	is_prime(int num);
+static inline int is_prime(int num);
 
-t_sampler	*new_sampler(int dim)
-{
-	t_sampler	*sampler;
-	int			prime;
-	int			i;
+t_sampler *new_sampler(int dim) {
+	t_sampler *sampler;
+	int prime;
+	int i;
 
-	sampler = (t_sampler *)malloc(sizeof(t_sampler));
+	sampler = (t_sampler *) malloc(sizeof(t_sampler));
 	sampler->dim = dim;
-	sampler->primes = (int *)malloc(sizeof(int) * dim);
+	sampler->primes = (int *) malloc(sizeof(int) * dim);
 	if (!sampler->primes)
 		return (NULL);
 	prime = 2;
 	i = 0;
-	while (i < dim)
-	{
+	while (i < dim) {
 		while (!is_prime(prime))
 			prime++;
 		sampler->primes[i] = prime;
@@ -40,8 +38,7 @@ t_sampler	*new_sampler(int dim)
 	return (sampler);
 }
 
-uint32_t	hash(uint32_t x)
-{
+uint32_t hash(uint32_t x) {
 	x += ~(x << 15);
 	x ^= (x >> 10);
 	x += (x << 3);
@@ -51,8 +48,7 @@ uint32_t	hash(uint32_t x)
 	return (x);
 }
 
-void	init_sampler(t_sampler	*sampler, uint32_t seed)
-{
+void init_sampler(t_sampler *sampler, uint32_t seed) {
 	sampler->rnd_unit = generate_uniform_number(seed);
 	if (sampler->curr_pass == UINT32_MAX)
 		sampler->curr_pass = 1;
@@ -62,15 +58,13 @@ void	init_sampler(t_sampler	*sampler, uint32_t seed)
 	sampler->curr_prime = 0;
 }
 
-static inline int	is_prime(int num)
-{
-	int		i;
+static inline int is_prime(int num) {
+	int i;
 
 	if (num <= 1)
 		return (0);
 	i = 2;
-	while (i * i <= num)
-	{
+	while (i * i <= num) {
 		if (num % i == 0)
 			return (0);
 		i++;
@@ -78,9 +72,8 @@ static inline int	is_prime(int num)
 	return (1);
 }
 
-float	generate_uniform_number(uint32_t seed)
-{
-	t_rnd_params	p;
+float generate_uniform_number(uint32_t seed) {
+	t_rnd_params p;
 
 	p.i = (seed >> 9) | 0x3f800000u;
 	return (p.f - 1.0f);

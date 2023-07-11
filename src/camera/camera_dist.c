@@ -12,19 +12,29 @@
 
 #include "camera.h"
 
-static inline double	sign(double v)
-{
-	if (v >= 0.0)
+static inline double
+sign(double v) {
+	if (v >=
+		0.0)
 		return (1.0);
 	return (-1.0);
 }
 
-static inline double	triangle_dist(double v)
-{
-	double		value;
+static inline double
+triangle_dist(
+	double v) {
+	double value;
 
-	value = v * 2.0 - 1.0;
-	v = value / sqrt(fabs(value));
-	v = clamp(v, -1.0, 1.0);
-	return (v - sign(value));
+	value = v *
+		2.0 -
+		1.0;
+	v = value /
+		sqrt(fabs(
+			value));
+	v = clamp(
+		v,
+		-1.0,
+		1.0);
+	return (v -
+		sign(value));
 }

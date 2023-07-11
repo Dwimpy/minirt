@@ -12,9 +12,10 @@
 
 #include "color.h"
 
-t_color	color_zero(void)
-{
-	t_color	color;
+t_color
+color_zero(
+	void) {
+	t_color color;
 
 	color.r = M_EPSILON;
 	color.b = M_EPSILON;
@@ -22,7 +23,11 @@ t_color	color_zero(void)
 	return (color);
 }
 
-t_color	color_sqrt(t_color color)
-{
-	return ((t_color){sqrt(color.r), sqrt(color.g), sqrt(color.b)});
+t_color
+color_sqrt(
+	t_color color) {
+	return ((t_color) {
+		sqrt(color.r),
+		sqrt(color.g),
+		sqrt(color.b)});
 }
