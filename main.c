@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 07:59:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/07/11 00:01:27 by arobu            ###   ########.fr       */
+/*   Updated: 2023/07/12 00:40:14 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #include "sphere.h"
 #include "tests.h"
 #include "transform.h"
-#include "rect.h"
 #include <stdio.h>
 
 #define SCREEN_WIDTH 1024
