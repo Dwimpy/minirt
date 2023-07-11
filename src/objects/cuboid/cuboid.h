@@ -22,4 +22,5 @@ typedef struct s_cuboid
 	t_vec3		v;
 }				t_cuboid;
 
+t_cuboid *create_cuboid(t_shape_info *cuboid);
 #endif
