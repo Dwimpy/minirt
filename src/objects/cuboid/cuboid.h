@@ -18,7 +18,8 @@ typedef struct s_cuboid
 {
 	t_vec3		center;
 	t_vec3		axis;
-
+	t_vec3		u;
+	t_vec3		v;
 }				t_cuboid;
 
 #endif
