@@ -63,7 +63,7 @@ bool scatter_metal(t_scatter_params params, t_sampler *sampler) {
 	reflected = vec_reflect(params.ray->dir, params.hit->surf_normal);
 	*params.scattered = create_ray(
 		params.hit->isec_point,
-		vec_add(reflected, vec_scale(0.0, generate_unit_sphere(sampler))));
+		vec_add(reflected, vec_scale(0.4, generate_unit_sphere(sampler))));
 	*params.attenuation = params.hit->material->albedo;
 	return (vec_dot(params.scattered->dir, params.hit->surf_normal) > 0);
 }

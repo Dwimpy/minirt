@@ -29,83 +29,39 @@ typedef struct s_vec3 {
 	double z;
 } t_vec3;
 
-static const t_vec3 g_world_up = (t_vec3) {
-	0.0,
-	1.0,
-	0.0};
+static const t_vec3 g_world_up = (t_vec3) {0.0, 1.0, 0.0};
 
-t_vec3
-vec_add(t_vec3 a,
-		t_vec3 b);
+t_vec3 vec_add(t_vec3 a, t_vec3 b);
 
-t_vec3
-vec_scale(
-	double s,
-	t_vec3 a);
+t_vec3 vec_scale(double s, t_vec3 a);
 
-t_vec3
-vec_sub(t_vec3 a,
-		t_vec3 b);
+t_vec3 vec_sub(t_vec3 a, t_vec3 b);
 
-t_vec3
-vec_cross(
-	t_vec3 a,
-	t_vec3 b);
+t_vec3 vec_cross(t_vec3 a, t_vec3 b);
 
-t_vec3
-vec_normalize(
-	t_vec3 a);
+t_vec3 vec_normalize(t_vec3 a);
 
-t_vec3
-vec_zero(
-	void);
+t_vec3 vec_zero(void);
 
-t_vec3
-vec_reflect(
-	t_vec3 vec,
-	t_vec3 normal);
+t_vec3 vec_reflect(t_vec3 vec, t_vec3 normal);
 
-t_vec3
-vec_refract(
-	t_vec3 r,
-	t_vec3 n,
-	double ref_ratio);
+t_vec3 vec_refract(t_vec3 r, t_vec3 n, double ref_ratio);
 
-t_vec3
-vec_project(
-	t_vec3 vector,
-	t_vec3 axis);
+t_vec3 vec_project(t_vec3 vector, t_vec3 axis);
 
-double
-clamp(double x,
-	  double min,
-	  double max);
+double clamp(double x, double min, double max);
 
-double
-vec_magnitude(
-	t_vec3 a);
+double vec_magnitude(t_vec3 a);
 
-double
-vec_magnitude_squared(
-	t_vec3 a);
+double vec_magnitude_squared(t_vec3 a);
 
-double
-vec_dot(t_vec3 a,
-		t_vec3 b);
+double vec_dot(t_vec3 a, t_vec3 b);
 
-double
-max(double a,
-	double b);
+double max(double a, double b);
 
-void
-vec_print(
-	t_vec3 a);
+void vec_print(t_vec3 a);
 
-void
-set_vec_comp(
-	t_vec3 *vec,
-	double x,
-	double y,
-	double z);
+void set_vec_comp(t_vec3 *vec, double x, double y, double z);
 
+void vec3_compute_uv_axes(t_vec3 axis, t_vec3 *u, t_vec3 *v);
 #endif

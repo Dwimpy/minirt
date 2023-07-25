@@ -21,11 +21,12 @@
 #include "sphere.h"
 #include "tests.h"
 #include "transform.h"
+#include "cuboid.h"
 #include <stdio.h>
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 1024
-#define SPP 8.0
+#define SPP 1.0
 
 int main() {
 	t_image *image;
@@ -46,16 +47,17 @@ int main() {
 	int k;
 	t_list *cur;
 	t_rect	*rect;
+	t_cuboid	*cuboid;
 	sampler = new_sampler(1000);
 //	if (!run_tests(&result))
 //		return (0);
-	image = create_window(1280, 1080, "MiniRT", 0);
+	image = create_window(1280, 820, "MiniRT", 0);
 	camera = cam_setup(
-		(t_cam_params) {(t_vec3) {0.0, 504.5, -15.0}, // Position
+		(t_cam_params) {(t_vec3) {0.0, 505, -20.0}, // Position
 						(t_vec3) {0.0, 0.0, 1.0},     // Look-at
 						50.0, (double) image->width / (double) image->height});
 	init_sampler(sampler, hash(3325));
-	sphere = create_sphere(3.0, (t_vec3) {0.0, 509.5, 10.0},
+	sphere = create_sphere(3.0, (t_vec3) {0.0, 505.5, 10.0},
 						   lambertian((t_color) {0.7, 0.3, 0.3}));
 	sphere2 = create_sphere(500, (t_vec3) {0.0, 0.0, 10.0},
 							lambertian((t_color) {0.7, 0.3, 0.3}));
@@ -77,15 +79,22 @@ int main() {
 //	vec_print(sphere4->data->center);
 	rect = create_rect((t_rect_data){
 		(t_vec3){0.0, 504, 1.0},
-		(t_vec3){1.0, 0.0, 1.0},
+		(t_vec3){0.0, 0.0, 1.0},
 		1.0,
 		1.0
 	}, lambertian((t_color){0.7, 0.3, 0.3}));
-	list = ft_lstnew(rect);
-//	ft_lstadd_back(&list, ft_lstnew(sphere));
-//	ft_lstadd_back(&list, ft_lstnew(sphere2));
-//	ft_lstadd_back(&list, ft_lstnew(sphere3));
-//	ft_lstadd_back(&list, ft_lstnew(sphere4));
+	cuboid = create_cuboid((t_cuboid_data){
+		(t_vec3){0.0, 502, 1.0},
+		(t_vec3){1.0, 1.0, 0.6},
+		4.0,
+		2.0,
+		4.5
+	}, lambertian((t_color){0.7, 0.3, 0.3}));
+	list = ft_lstnew(cuboid);
+	ft_lstadd_back(&list, ft_lstnew(sphere));
+	ft_lstadd_back(&list, ft_lstnew(sphere2));
+	ft_lstadd_back(&list, ft_lstnew(sphere3));
+	ft_lstadd_back(&list, ft_lstnew(sphere4));
 	cam_print(camera);
 	i = -1;
 	j = -1;

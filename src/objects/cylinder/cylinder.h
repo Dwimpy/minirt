@@ -19,12 +19,12 @@
 #include "vec3.h"
 
 typedef struct s_cylinder_data {
-	t_vec3	center;
-	t_vec3	axis;
-	double	radius;
-	double	height;
-	t_disk	*upper;
-	t_disk	*lower;
+	t_vec3 center;
+	t_vec3 axis;
+	double radius;
+	double height;
+	t_disk *upper;
+	t_disk *lower;
 } t_cylinder_data;
 
 typedef struct s_cylinder {
