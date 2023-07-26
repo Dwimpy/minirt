@@ -10,21 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "plane.h"
 #include "hit_record.h"
+#include "plane.h"
 #include "shape.h"
 #include "vec3.h"
 #include <float.h>
 
-t_plane *create_plane(t_plane_data data, t_material material) {
-	t_plane *plane;
-	t_shape_info *plane_info;
-	t_plane_data *plane_data;
+t_plane	*create_plane(t_plane_data data, t_material material)
+{
+	t_plane			*plane;
+	t_shape_info	*plane_info;
+	t_plane_data	*plane_data;
 
-	plane_info = shape_type_create((t_shape_info) {
+	plane_info = shape_type_create((t_shape_info){
 		plane_get_name_override, plane_hit, plane_destroy_override});
-	plane = (t_plane *) shape_create(plane_info);
-	plane_data = (t_plane_data *) malloc(sizeof(t_plane_data));
+	plane = (t_plane *)shape_create(plane_info);
+	plane_data = (t_plane_data *)malloc(sizeof(t_plane_data));
 	*plane_data = data;
 	plane->data = plane_data;
 	plane->shape.shape_data = plane_data;
@@ -32,12 +33,13 @@ t_plane *create_plane(t_plane_data data, t_material material) {
 	return (plane);
 }
 
-bool plane_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit) {
-	t_plane *plane;
-	t_vec3 pc;
-	t_vec3 pc_plane;
-	double aligned;
-	double root;
+bool	plane_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
+{
+	t_plane	*plane;
+	t_vec3	pc;
+	t_vec3	pc_plane;
+	double	aligned;
+	double	root;
 
 	plane = plane_from_shape(shape);
 	aligned = vec_dot(plane->data->axis, ray->dir);

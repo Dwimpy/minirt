@@ -18,10 +18,11 @@ create_window(
 	size_t w,
 	size_t h,
 	char *title,
-	bool resize) {
-	t_image *image;
+	bool resize)
+{
+	t_image	*image;
 
-	image = (t_image *) malloc(
+	image = (t_image *)malloc(
 		sizeof(t_image));
 	image->width = w;
 	image->height = h;
@@ -45,12 +46,12 @@ create_window(
 	return (image);
 }
 
-void
-set_pixel(
+void	set_pixel(
 	t_image *image,
 	t_color color,
 	int i,
-	int j) {
+	int j)
+{
 	mlx_put_pixel(
 		image->img,
 		i,
@@ -65,9 +66,9 @@ set_pixel(
 			0xFF));
 }
 
-void
-draw_loop(
-	mlx_t *win) {
+void	draw_loop(
+	mlx_t *win)
+{
 	mlx_loop(
 		win);
 	mlx_terminate(

@@ -15,45 +15,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void
-print_log_type(
-	t_logtype type) {
+void	print_log_type(
+	t_logtype type)
+{
 	if (type ==
 		regular)
-		return;
+		return ;
 	else if (
 		type ==
-			info)
+		info)
 		printf("%sInfo: %s",
-			   LOG_COLOR_GREEN,
-			   LOG_COLOR_WHITE);
+				LOG_COLOR_GREEN,
+				LOG_COLOR_WHITE);
 	else if (
 		type ==
-			debug)
+		debug)
 		printf("%sDebug: %s",
-			   LOG_COLOR_BLUE,
-			   LOG_COLOR_WHITE);
+				LOG_COLOR_BLUE,
+				LOG_COLOR_WHITE);
 	else if (
 		type ==
-			error)
+		error)
 		printf("%sDebug: %s",
-			   LOG_COLOR_RED,
-			   LOG_COLOR_WHITE);
+				LOG_COLOR_RED,
+				LOG_COLOR_WHITE);
 	else if (
 		type ==
-			test_error)
+		test_error)
 		printf("%sFailed: %s",
-			   LOG_COLOR_RED,
-			   LOG_COLOR_WHITE);
+				LOG_COLOR_RED,
+				LOG_COLOR_WHITE);
 }
 
-void
-logger(t_logtype type,
-	   const char *fmt,
-	   ...) {
-	va_list va_list;
-	char buffer[4096];
-	int len;
+void	logger(t_logtype type,
+			const char *fmt,
+			...)
+{
+	va_list	va_list;
+	char	buffer[4096];
+	int		len;
 
 	len = 0;
 	print_log_type(
@@ -68,12 +68,13 @@ logger(t_logtype type,
 		va_list);
 	va_end(va_list);
 	printf("%s",
-		   buffer);
+			buffer);
 	if (len >
 		4096)
 		printf("Buffer Overflowed!\n");
 	if (type ==
-		error) {
+		error)
+	{
 		printf("An error occured\n");
 		exit(1);
 	}

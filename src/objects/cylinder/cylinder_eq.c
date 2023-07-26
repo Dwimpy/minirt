@@ -12,26 +12,30 @@
 
 #include "cylinder.h"
 
-double get_quadratic_term(t_vec3 r_dir, t_vec3 cyl_axis) {
+double	get_quadratic_term(t_vec3 r_dir, t_vec3 cyl_axis)
+{
 	return (vec_dot(r_dir, r_dir) -
-		vec_dot(r_dir, cyl_axis) * vec_dot(r_dir, cyl_axis));
+			vec_dot(r_dir, cyl_axis) * vec_dot(r_dir, cyl_axis));
 }
 
-double get_linear_term(t_vec3 oc, t_vec3 r_dir, t_vec3 cyl_axis) {
-	return (2 * (vec_dot(r_dir, oc) -
-		vec_dot(r_dir, cyl_axis) * vec_dot(oc, cyl_axis)));
+double	get_linear_term(t_vec3 oc, t_vec3 r_dir, t_vec3 cyl_axis)
+{
+	return (2 * (vec_dot(r_dir, oc) - vec_dot(r_dir, cyl_axis) * vec_dot(oc,
+				cyl_axis)));
 }
 
-double get_constant_term(t_vec3 oc, t_vec3 r_dir, t_cylinder *cyl) {
+double	get_constant_term(t_vec3 oc, t_vec3 r_dir, t_cylinder *cyl)
+{
 	return (vec_dot(oc, oc) -
-		vec_dot(oc, cyl->data->axis) * vec_dot(oc, cyl->data->axis) -
-		cyl->data->radius * cyl->data->radius);
+			vec_dot(oc, cyl->data->axis) * vec_dot(oc, cyl->data->axis) -
+			cyl->data->radius * cyl->data->radius);
 }
 
-bool get_intersection_root(double a, double b, double c, double t[2]) {
-	double disc;
-	double sqrt_disc;
-	double root;
+bool	get_intersection_root(double a, double b, double c, double t[2])
+{
+	double	disc;
+	double	sqrt_disc;
+	double	root;
 
 	disc = b * b - 4 * a * c;
 	if (disc < 0.0)

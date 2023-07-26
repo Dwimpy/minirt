@@ -16,32 +16,34 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-t_sphere *create_sphere(double radius, t_vec3 center, t_material material) {
-	t_shape_info *sphere_info;
-	t_sphere *sphere;
-	t_sphere_data *sph_data;
+t_sphere	*create_sphere(double radius, t_vec3 center, t_material material)
+{
+	t_shape_info	*sphere_info;
+	t_sphere		*sphere;
+	t_sphere_data	*sph_data;
 
-	sphere_info = shape_type_create((t_shape_info) {
+	sphere_info = shape_type_create((t_shape_info){
 		sphere_get_name_override, sphere_hit, sphere_destroy_override});
-	sphere = (t_sphere *) shape_create(sphere_info);
-	sph_data = (t_sphere_data *) malloc(sizeof(t_sphere_data));
+	sphere = (t_sphere *)shape_create(sphere_info);
+	sph_data = (t_sphere_data *)malloc(sizeof(t_sphere_data));
 	sph_data->center = center;
 	sph_data->radius = radius;
 	sphere->data = sph_data;
-	sphere->shape.shape_data = (t_sphere_data *) sph_data;
+	sphere->shape.shape_data = (t_sphere_data *)sph_data;
 	sphere->shape.material = material;
 	return (sphere);
 }
 
-bool sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit) {
-	t_sphere *sphere;
-	t_vec3 oc;
-	double a;
-	double half_b;
-	double c;
-	double disc;
-	double sqrt_disc;
-	double root;
+bool	sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
+{
+	t_sphere	*sphere;
+	t_vec3		oc;
+	double		a;
+	double		half_b;
+	double		c;
+	double		disc;
+	double		sqrt_disc;
+	double		root;
 
 	sphere = sphere_from_shape(shape);
 	oc = vec_sub(ray->pos, sphere->data->center);
@@ -53,7 +55,8 @@ bool sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit) {
 		return (false);
 	sqrt_disc = sqrt(disc);
 	root = (-half_b - sqrt_disc) / a;
-	if (root < hit->min_t || hit->max_t < root) {
+	if (root < hit->min_t || hit->max_t < root)
+	{
 		root = (-half_b + sqrt_disc) / a;
 		if (root < hit->min_t || hit->max_t < root)
 			return (false);

@@ -12,49 +12,49 @@
 
 #include "tester.h"
 
-bool
-double_equals(
+bool	double_equals(
 	double a,
 	double b,
-	double epsilon) {
-	double diff;
+	double epsilon)
+{
+	double	diff;
 
 	diff = a -
 		b;
 	if (fabs(
-		diff) >
+			diff) >
 		epsilon)
 		return (false);
 	return (true);
 }
 
-bool
-equals_precision_cm(
+bool	equals_precision_cm(
 	double a,
-	double b) {
+	double b)
+{
 	return (double_equals(
 		a,
 		b,
 		0.01f));
 }
 
-bool
-equals_precision_um(
+bool	equals_precision_um(
 	double a,
-	double b) {
+	double b)
+{
 	return (double_equals(
 		a,
 		b,
 		0.000005f));
 }
 
-bool
-vec_equals(
+bool	vec_equals(
 	t_vec3 a,
-	t_vec3 b) {
+	t_vec3 b)
+{
 	if (!equals_precision_cm(
-		a.x,
-		b.x) ||
+			a.x,
+			b.x) ||
 		!equals_precision_cm(
 			a.y,
 			b.y) ||
@@ -65,9 +65,9 @@ vec_equals(
 	return (true);
 }
 
-bool
-test_success(
-	bool success) {
+bool	test_success(
+	bool success)
+{
 	if (success)
 		return (true);
 	return (false);

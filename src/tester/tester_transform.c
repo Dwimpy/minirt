@@ -13,26 +13,27 @@
 #include "ft_printf.h"
 #include "tests.h"
 
-bool
-transform_test_scale(
+bool	transform_test_scale(
 	t_test_case test,
-	t_test_result *result) {
+	t_test_result *result)
+{
 	INIT_TEST(
 		t_vec3 *)
 	DESCRIPTION(
 		"TransformScale")
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		3.0,
 		4.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_scale(
 			1.5,
 			1.5,
-			1.5).mat);
-	TEST(*(t_vec3 *) result->result;)
+			1.5)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -40,17 +41,18 @@ transform_test_scale(
 			4.5f,
 			6.0f);)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		-2.0,
 		2.0,
 		-2.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_scale(
 			0.5,
 			0.5,
-			0.5).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.5)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -61,17 +63,18 @@ transform_test_scale(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		1.0,
 		2.0,
 		3.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_scale(
 			0.0f,
 			0.0f,
-			0.0f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.0f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -84,26 +87,27 @@ transform_test_scale(
 	return (success);
 }
 
-bool
-transform_test_translate(
+bool	transform_test_translate(
 	t_test_case test,
-	t_test_result *result) {
+	t_test_result *result)
+{
 	INIT_TEST(
 		t_vec3 *)
 	DESCRIPTION(
 		"TransformTranslate")
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0f,
 		3.0f,
 		4.0f);
 	transform_point(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_translate(
 			1.0f,
 			1.0f,
-			1.0f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			1.0f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -114,17 +118,18 @@ transform_test_translate(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		-2.0f,
 		-2.0f,
 		-2.0f);
 	transform_point(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_translate(
 			-1.0f,
 			-1.0f,
-			0.5f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.5f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -135,17 +140,18 @@ transform_test_translate(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		1.0f,
 		2.0f,
 		3.0f);
 	transform_point(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_translate(
 			0.0f,
 			0.0f,
-			0.0f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.0f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -158,24 +164,25 @@ transform_test_translate(
 	return (success);
 }
 
-bool
-transform_test_rotate_x(
+bool	transform_test_rotate_x(
 	t_test_case test,
-	t_test_result *result) {
+	t_test_result *result)
+{
 	INIT_TEST(
 		t_vec3 *)
 	DESCRIPTION(
 		"TransformRotateX")
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		1.0f,
 		0.0f,
 		0.0f);
 	transform_point(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_x(
-			M_PI_2).mat);
-	TEST(*(t_vec3 *) result->result;)
+			M_PI_2)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -186,15 +193,16 @@ transform_test_rotate_x(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		2.0,
 		3.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_x(
-			M_PI_4).mat);
-	TEST(*(t_vec3 *) result->result;)
+			M_PI_4)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -205,15 +213,16 @@ transform_test_rotate_x(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		2.0,
 		2.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_x(
-			0.0f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.0f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -226,24 +235,25 @@ transform_test_rotate_x(
 	return (success);
 }
 
-bool
-transform_test_rotate_y(
+bool	transform_test_rotate_y(
 	t_test_case test,
-	t_test_result *result) {
+	t_test_result *result)
+{
 	INIT_TEST(
 		t_vec3 *)
 	DESCRIPTION(
 		"TransformRotateY")
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		3.0,
 		4.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_y(
-			M_PI_2).mat);
-	TEST(*(t_vec3 *) result->result;)
+			M_PI_2)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -254,15 +264,16 @@ transform_test_rotate_y(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		1.0,
 		2.0,
 		3.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_y(
-			M_PI_4).mat);
-	TEST(*(t_vec3 *) result->result;)
+			M_PI_4)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -273,15 +284,16 @@ transform_test_rotate_y(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		2.0,
 		2.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_y(
-			0.0f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.0f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -294,24 +306,25 @@ transform_test_rotate_y(
 	return (success);
 }
 
-bool
-transform_test_rotate_z(
+bool	transform_test_rotate_z(
 	t_test_case test,
-	t_test_result *result) {
+	t_test_result *result)
+{
 	INIT_TEST(
 		t_vec3 *)
 	DESCRIPTION(
 		"TransformRotateZ")
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		3.0,
 		4.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_z(
-			M_PI_2).mat);
-	TEST(*(t_vec3 *) result->result;)
+			M_PI_2)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -322,15 +335,16 @@ transform_test_rotate_z(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		1.0,
 		2.0,
 		3.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_z(
-			M_PI_4).mat);
-	TEST(*(t_vec3 *) result->result;)
+			M_PI_4)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -341,15 +355,16 @@ transform_test_rotate_z(
 		test,
 		result)
 	set_vec_comp(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		2.0,
 		2.0,
 		2.0);
 	transform_vector(
-		(t_vec3 *) result->result,
+		(t_vec3 *)result->result,
 		tf_rotate_z(
-			0.0f).mat);
-	TEST(*(t_vec3 *) result->result;)
+			0.0f)
+			.mat);
+	TEST(*(t_vec3 *)result->result;)
 	TEST_ASSERT(
 		set_vec_comp(
 			ex,
@@ -362,18 +377,18 @@ transform_test_rotate_z(
 	return (success);
 }
 
-bool
-transform_test_new(
+bool	transform_test_new(
 	t_test_case test,
-	t_test_result *result) {
+	t_test_result *result)
+{
 	INIT_TEST(
 		t_mat4x4 *)
 	DESCRIPTION(
 		"TransformNew")
-	*(t_mat4x4 *) result->result = tf_new().mat;
-	TEST(*(t_mat4x4 *) result->result;)
+	*(t_mat4x4 *)result->result = tf_new().mat;
+	TEST(*(t_mat4x4 *)result->result;)
 	TEST_ASSERT_MATRIX(
-		*ex = matrix_identity();)
+			*ex = matrix_identity();)
 	PRINT_ERROR(
 		test,
 		result)

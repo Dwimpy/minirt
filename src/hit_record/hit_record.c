@@ -13,8 +13,9 @@
 #include "hit_record.h"
 #include <limits.h>
 
-t_hit_rec new_hit_rec(void) {
-	t_hit_rec rec;
+t_hit_rec	new_hit_rec(void)
+{
+	t_hit_rec	rec;
 
 	rec.isec_point = vec_zero();
 	rec.min_t = M_EPSILON;
@@ -26,11 +27,15 @@ t_hit_rec new_hit_rec(void) {
 	return (rec);
 }
 
-void set_front_face(t_ray *ray, t_hit_rec *hit) {
-	if (vec_dot(ray->dir, hit->surf_normal) < 0.0) {
+void	set_front_face(t_ray *ray, t_hit_rec *hit)
+{
+	if (vec_dot(ray->dir, hit->surf_normal) < 0.0)
+	{
 		hit->surf_normal = vec_scale(1.0, hit->surf_normal);
 		hit->front_face = true;
-	} else {
+	}
+	else
+	{
 		hit->surf_normal = vec_scale(-1.0, hit->surf_normal);
 		hit->front_face = false;
 	}

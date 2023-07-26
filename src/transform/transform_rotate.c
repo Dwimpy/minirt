@@ -12,18 +12,20 @@
 
 #include "transform.h"
 
-inline t_transform tf_rotate(t_euler or) {
-	t_transform transform;
+inline t_transform	tf_rotate(t_euler or)
+{
+	t_transform	transform;
 
 	transform.mat = quat_to_mat(eul_to_quat(or));
 	transform.inv_mat = matrix_inverse(transform.mat, 4);
 	return (transform);
 }
 
-inline t_transform tf_rotate_x(double radians) {
-	t_transform transform;
-	double cosine;
-	double sine;
+inline t_transform	tf_rotate_x(double radians)
+{
+	t_transform	transform;
+	double		cosine;
+	double		sine;
 
 	cosine = cos(radians);
 	sine = sin(radians);
@@ -38,10 +40,11 @@ inline t_transform tf_rotate_x(double radians) {
 	return (transform);
 }
 
-inline t_transform tf_rotate_y(double radians) {
-	t_transform transform;
-	double cosine;
-	double sine;
+inline t_transform	tf_rotate_y(double radians)
+{
+	t_transform	transform;
+	double		cosine;
+	double		sine;
 
 	cosine = cos(radians);
 	sine = sin(radians);
@@ -56,10 +59,11 @@ inline t_transform tf_rotate_y(double radians) {
 	return (transform);
 }
 
-inline t_transform tf_rotate_z(double radians) {
-	t_transform transform;
-	double cosine;
-	double sine;
+inline t_transform	tf_rotate_z(double radians)
+{
+	t_transform	transform;
+	double		cosine;
+	double		sine;
 
 	cosine = cos(radians);
 	sine = sin(radians);

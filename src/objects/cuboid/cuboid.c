@@ -25,8 +25,7 @@ t_cuboid	*create_cuboid(t_cuboid_data data, t_material material)
 		(t_shape_info){
 			cuboid_get_name_override,
 			cuboid_hit,
-			cuboid_destroy_override
-		});
+			cuboid_destroy_override});
 	cuboid = (t_cuboid *)shape_create(cuboid_info);
 	cuboid_data = (t_cuboid_data *)malloc(sizeof(t_cuboid_data));
 	data.faces = (t_rect **)malloc(sizeof(t_rect *) * 6);
@@ -41,19 +40,21 @@ t_cuboid	*create_cuboid(t_cuboid_data data, t_material material)
 	return (cuboid);
 }
 
-void get_face_height(int idx, double *size, t_cuboid_data data)
+void	get_face_height(int idx, double *size, t_cuboid_data data)
 {
 	if (idx == 0 || idx == 3)
 	{
 		size[0] = data.width;
 		size[1] = data.height;
 		size[2] = data.depth;
-	}else if (idx == 1 || idx == 4)
+	}
+	else if (idx == 1 || idx == 4)
 	{
 		size[0] = data.height;
 		size[1] = data.depth;
 		size[2] = data.width;
-	}else if (idx == 2 || idx == 5)
+	}
+	else if (idx == 2 || idx == 5)
 	{
 		size[0] = data.depth;
 		size[1] = data.width;
@@ -61,7 +62,7 @@ void get_face_height(int idx, double *size, t_cuboid_data data)
 	}
 }
 
-t_rect *create_face(int idx, t_cuboid_data data, t_material material)
+t_rect	*create_face(int idx, t_cuboid_data data, t_material material)
 {
 	t_rect_data	new_data;
 	t_rect		*new_rect;
@@ -106,28 +107,30 @@ t_rect *create_face(int idx, t_cuboid_data data, t_material material)
 		new_data.u = data.axis;
 		new_data.v = data.u;
 	}
-	new_data.center = vec_add(data.center, vec_scale(size[2] * 0.5, new_data.axis));
+	new_data.center = vec_add(data.center, vec_scale(size[2] * 0.5,
+				new_data.axis));
 	new_rect = create_cuboid_face(new_data, material);
 	return (new_rect);
 }
 
-bool		cuboid_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
+bool	cuboid_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
 {
-	t_cuboid	*cuboid;
-	t_shape		*face;
-	bool		hit_anything;
-	int			i;
+	t_cuboid *cuboid;
+	t_shape *face;
+	bool hit_anything;
+	int i;
 
 	cuboid = cuboid_from_shape(shape);
 	hit_anything = false;
 	i = 0;
-	while (i < 6) {
+	while (i < 6)
+	{
 		face = rect_to_shape(cuboid->data->faces[i]);
 		if (cuboid->data->faces[i]->shape.shape_info->hit(face, ray, hit))
 			hit_anything = true;
 		i++;
 	}
 	if (hit_anything)
-		return true;
+		return (true);
 	return (false);
 }

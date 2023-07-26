@@ -12,7 +12,7 @@
 
 #include "tester.h"
 
-static const t_test_case g_tests[] = {
+static const t_test_case	g_tests[] = {
 	{"Addition::vec_add", VECTOR, vector_test_add},
 	{"VecZero::vec_zero", VECTOR, vector_test_zero},
 	{"VecScale::vec_scale", VECTOR, vector_test_scale},

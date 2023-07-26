@@ -13,7 +13,7 @@
 # Variables
 NAME			= minirt
 
-VPATH			= ./src/vector ./src/transform ./src/camera ./src/quaternion \
+VPATH			= ./src/vector ./src/transform ./src/scene ./src/camera ./src/quaternion \
 				  ./src/scene ./src/logger ./src/tester ./src/ray ./src/color \
 				  ./src/image ./src/hit_record ./src/sampler ./src/objects/sphere \
 				  ./src/objects/shape ./src/materials ./src/objects/cylinder ./src/objects/plane \
@@ -40,6 +40,7 @@ INCLUDE			+= -I ./src/objects/disk
 INCLUDE			+= -I ./src/objects/plane
 INCLUDE			+= -I ./src/objects/rect
 INCLUDE			+= -I ./src/objects/cuboid
+INCLUDE			+= -I ./src/scene
 
 
 DSYM			= ./minirt.dSYM
@@ -62,10 +63,10 @@ CC			= cc #-Wall -Werror -Wextra
 #CFLAGS		=  -march=nocona
 ASAN		= #-fsanitize=address -g3
 CFLAGS		= -Ofast -march=nocona -flto #-fsanitize=address -g3 #-g3 -Wall -Werror -Wextra -g3 #
-#FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
+FRAMEWORK	= -framework Cocoa -framework OpenGL -framework IOKit
 LDLFLAGS	= -L $(LIBFT_FOLDER) -L $(MLX_LIB) -L $(GLFW_LIB)
-#LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
-LIBFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
+LIBFLAGS	= -lft -lmlx42 -lglfw3 -lm
+#LIBFLAGS	= -lft -L ./libft/ -lmlx42 -L ./MLX42/build -ldl -lglfw -pthread
 
 #Archive and Remove
 RM			= rm -f

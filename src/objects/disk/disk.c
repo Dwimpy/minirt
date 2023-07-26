@@ -17,23 +17,26 @@
 #include "vec3.h"
 #include <float.h>
 
-t_disk *create_disk(t_disk_data data, t_material material) {
-	t_disk *disk;
-	t_shape_info *disk_info;
-	t_disk_data *disk_data;
+t_disk	*create_disk(t_disk_data data, t_material material)
+{
+	t_disk			*disk;
+	t_shape_info	*disk_info;
+	t_disk_data		*disk_data;
 
 	disk_info = shape_type_create(
-		(t_shape_info) {disk_get_name_override, disk_hit, disk_destroy_override});
-	disk = (t_disk *) shape_create(disk_info);
-	disk_data = (t_disk_data *) malloc(sizeof(t_disk_data));
+		(t_shape_info){disk_get_name_override, disk_hit,
+			disk_destroy_override});
+	disk = (t_disk *)shape_create(disk_info);
+	disk_data = (t_disk_data *)malloc(sizeof(t_disk_data));
 	*disk_data = data;
 	disk->data = disk_data;
-	disk->shape.shape_data = (t_disk_data *) disk_data;
+	disk->shape.shape_data = (t_disk_data *)disk_data;
 	disk->shape.material = material;
 	return (disk);
 }
 
-bool disk_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit) {
+bool	disk_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
+{
 	t_disk *disk;
 	t_vec3 pc;
 	double aligned;
