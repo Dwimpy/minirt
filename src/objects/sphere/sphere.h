@@ -33,8 +33,8 @@ typedef struct s_sphere
 }						t_sphere;
 
 t_shapes				sphere_get_name_override(t_shape *self);
-t_sphere				*create_sphere(double radius, t_vec3 center,
-							t_material material);
+t_sphere 				*create_sphere(double radius, t_vec3 center, \
+							t_material material, t_texture texture);
 void					sphere_destroy_override(t_shape *shape);
 bool					sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit);
 t_shape					*sphere_to_shape(t_sphere *sphere);

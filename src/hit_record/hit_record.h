@@ -13,6 +13,7 @@
 #ifndef HIT_RECORD_H
 # define HIT_RECORD_H
 # include "ray.h"
+#include "texture.h"
 # include <stdbool.h>
 
 typedef struct material	t_material;
@@ -22,6 +23,7 @@ typedef struct hit_rec
 	t_vec3				isec_point;
 	t_vec3				surf_normal;
 	t_material			*material;
+	t_texture			*texture;
 	bool				front_face;
 	double				min_t;
 	double				max_t;

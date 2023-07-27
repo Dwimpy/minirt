@@ -29,7 +29,7 @@ t_shape	*shape_create(t_shape_info *shape_info)
 	size_t	size;
 	t_shape	*shape;
 
-	size = sizeof(t_shape) + sizeof(t_material);
+	size = sizeof(t_shape);
 	shape = (t_shape *)malloc(size + 1);
 	shape->shape_info = shape_info;
 	return (shape);

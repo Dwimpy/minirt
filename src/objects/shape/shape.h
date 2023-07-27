@@ -13,6 +13,7 @@
 #ifndef SHAPE_H
 # define SHAPE_H
 # include "material.h"
+# include "texture.h"
 # include <stdbool.h>
 
 typedef struct s_shape	t_shape;
@@ -43,6 +44,7 @@ typedef struct s_shape
 {
 	t_shape_info		*shape_info;
 	t_material			material;
+	t_texture			texture;
 	void				*shape_data;
 }						t_shape;
 

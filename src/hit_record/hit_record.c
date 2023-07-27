@@ -23,6 +23,7 @@ t_hit_rec	new_hit_rec(void)
 	rec.surf_normal = vec_zero();
 	rec.material = NULL;
 	rec.front_face = 0;
+	rec.texture = NULL;
 	rec.t = 100e6;
 	return (rec);
 }

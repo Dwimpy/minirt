@@ -11,26 +11,28 @@
 /* ************************************************************************** */
 
 #include "sphere.h"
+#include "color.h"
+#include "texture.h"
 #include "vec3.h"
 #include <math.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
-t_sphere	*create_sphere(double radius, t_vec3 center, t_material material)
-{
-	t_shape_info	*sphere_info;
-	t_sphere		*sphere;
-	t_sphere_data	*sph_data;
+t_sphere *create_sphere(double radius, t_vec3 center, t_material material, t_texture texture) {
+	t_shape_info *sphere_info;
+	t_sphere *sphere;
+	t_sphere_data *sph_data;
 
-	sphere_info = shape_type_create((t_shape_info){
+	sphere_info = shape_type_create((t_shape_info) {
 		sphere_get_name_override, sphere_hit, sphere_destroy_override});
-	sphere = (t_sphere *)shape_create(sphere_info);
-	sph_data = (t_sphere_data *)malloc(sizeof(t_sphere_data));
+	sphere = (t_sphere *) shape_create(sphere_info);
+	sph_data = (t_sphere_data *) malloc(sizeof(t_sphere_data));
 	sph_data->center = center;
 	sph_data->radius = radius;
 	sphere->data = sph_data;
-	sphere->shape.shape_data = (t_sphere_data *)sph_data;
+	sphere->shape.shape_data = (t_sphere_data *) sph_data;
 	sphere->shape.material = material;
+	sphere->shape.texture = texture;
 	return (sphere);
 }
 
@@ -69,6 +71,7 @@ bool	sphere_hit(t_shape *shape, t_ray *ray, t_hit_rec *hit)
 	hit->surf_normal = vec_sub(hit->isec_point, sphere->data->center);
 	hit->surf_normal = vec_scale(1 / sphere->data->radius, hit->surf_normal);
 	hit->max_t = hit->t;
+	hit->texture = &sphere->shape.texture;
 	set_front_face(ray, hit);
 	return (true);
 }

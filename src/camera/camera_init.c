@@ -53,8 +53,8 @@ t_ray	cam_get_ray(t_camera *cam, t_image *image, \
 	pix_y = vec_scale(viewport_y / (double)image->height, cam->up);
 	ray.dir = vec_add(cam->forward, \
 				vec_add(vec_scale((double)image->width * 0.5 - \
-				(int)pix.x + triangle_dist(generate_sample(sampler)), pix_x), \
-				vec_scale((double)image->height * 0.5 - (int)pix.y + \
+				(int)pix.x - triangle_dist(generate_sample(sampler)), pix_x), \
+				vec_scale((double)image->height * 0.5 - (int)pix.y - \
 				triangle_dist(generate_sample(sampler)), pix_y)));
 	ray.dir = vec_normalize(ray.dir);
 	transform_point(&ray.pos, cam->transformation.mat);

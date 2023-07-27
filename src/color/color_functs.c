@@ -26,3 +26,8 @@ t_color	color_sqrt(t_color color)
 {
 	return ((t_color){sqrt(color.r), sqrt(color.g), sqrt(color.b)});
 }
+
+t_color		color_create(double r, double g, double b)
+{
+	return ((t_color){r, g, b});
+}

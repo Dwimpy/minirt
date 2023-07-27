@@ -26,10 +26,10 @@ int main() {
 	scene.objects = NULL;
 	sampler = new_sampler(1000);
 	init_sampler(sampler, hash(3325));
-	scene_set_resolution(&scene, 1280, 820);
-	scene_set_sampling(&scene, 4.0, 6);
-	scene_setup_cam(&scene, (t_vec3) {0.0, 505, -20.0},
-					(t_vec3) {0.0, 0.0, 1.0},
+	scene_set_resolution(&scene, 1280, 800);
+	scene_set_sampling(&scene, 64.0, 50);
+	scene_setup_cam(&scene, (t_vec3) {0.0, 570, 10.0},
+					(t_vec3) {0.0, -1.0, 0.0},
 					50.0);
 	cam_print(scene.camera);
 	image_create_window(&image, &scene);

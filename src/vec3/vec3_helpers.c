@@ -44,8 +44,3 @@ double	max(double a, double b)
 		return (b);
 	return (a);
 }
-
-t_vec3	vec3_lin_comb(double alpha, t_vec3 a, double beta, t_vec3 b)
-{
-	return (vec_add(vec_scale(alpha, a), vec_scale(beta, b)));
-}

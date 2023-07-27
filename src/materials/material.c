@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "material.h"
+#include "hit_record.h"
 #include "sampler.h"
 
 static double	reflectance(double cosine, double refraction_index);
@@ -47,13 +48,29 @@ t_material	glass(double ref_index)
 	return (material);
 }
 
+t_material		diffuse_light(t_color color)
+{
+	t_material	material;
+
+	material.refraction_index = 0.0;
+	material.type = DIFFUSE_LIGHT;
+	material.scatter = scatter_diffuse;
+	material.albedo = color;
+	return (material);
+}
+
+bool	scatter_diffuse(t_scatter_params params, t_sampler *sampler)
+{
+	return (false);
+}
+
 bool	scatter_lambertian(t_scatter_params params, t_sampler *sampler)
 {
 	t_vec3	scatter_dir;
 
 	scatter_dir = vec_add(params.hit->surf_normal,
 							vec_normalize(generate_unit_sphere(sampler)));
-	if (fabs(scatter_dir.x) < M_EPSILON || fabs(scatter_dir.y) < M_EPSILON ||
+	if (fabs(scatter_dir.x) < M_EPSILON && fabs(scatter_dir.y) < M_EPSILON &&
 		fabs(scatter_dir.z) < M_EPSILON)
 		scatter_dir = params.hit->surf_normal;
 	*params.scattered = create_ray(params.hit->isec_point, scatter_dir);
@@ -110,5 +127,5 @@ static double	reflectance(double cosine, double refraction_index)
 
 	reflectance = (1.0 - refraction_index) / (1.0 + refraction_index);
 	reflectance = reflectance * reflectance;
-	return (reflectance + (1.0 - reflectance) * pow((1.0 - cosine), 5.0));
+	return (reflectance + ((1.0 - reflectance) * pow((1.0 - cosine), 5.0)));
 }

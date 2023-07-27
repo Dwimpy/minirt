@@ -17,7 +17,7 @@ VPATH			= ./src/vec3 ./src/transform ./src/scene ./src/camera ./src/quaternion \
 				  ./src/scene ./src/logger ./src/tester ./src/ray ./src/color \
 				  ./src/image ./src/hit_record ./src/sampler ./src/objects/sphere \
 				  ./src/objects/shape ./src/materials ./src/objects/cylinder ./src/objects/plane \
-				  ./src/objects/disk ./src/objects/rect ./src/objects/cuboid
+				  ./src/objects/disk ./src/objects/rect ./src/objects/cuboid ./src/texture
 # Includes
 INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ 
 INCLUDE			+= -I ./src/vec3
@@ -41,6 +41,7 @@ INCLUDE			+= -I ./src/objects/plane
 INCLUDE			+= -I ./src/objects/rect
 INCLUDE			+= -I ./src/objects/cuboid
 INCLUDE			+= -I ./src/scene
+INCLUDE			+= -I ./src/texture
 
 
 DSYM			= ./minirt.dSYM
