@@ -27,7 +27,7 @@ typedef struct sampler
 	int				dim;
 	int				*primes;
 	double			rnd_unit;
-	unsigned int	curr_pass;
+	int				curr_pass;
 	int				curr_prime;
 }					t_sampler;
 

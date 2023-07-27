@@ -18,7 +18,7 @@
 typedef struct s_shape	t_shape;
 typedef enum e_shapes	t_shapes;
 typedef bool			(*t_shape_hit)(t_shape *shape, t_ray *ray,
-				t_hit_rec *hit);
+						t_hit_rec *hit);
 typedef void			(*t_destroy)(t_shape *shape);
 typedef t_shapes		(*t_shape_name)(t_shape *self);
 

@@ -13,7 +13,7 @@
 #include "sampler.h"
 
 static inline double	min(double a, double b);
-static inline double	wrap_around(float a, float b);
+static inline double	wrap_around(double a, double b);
 static inline double	radical_inverse(int pass, int base);
 
 double	generate_sample(t_sampler *sampler)
@@ -27,7 +27,7 @@ double	generate_sample(t_sampler *sampler)
 	return (sample);
 }
 
-static inline double	wrap_around(float a, float b)
+static inline double	wrap_around(double a, double b)
 {
 	if (a + b < 1.0f)
 		return (a + b);

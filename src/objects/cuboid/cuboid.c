@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cuboid.h"
+#include "rect.h"
 
 t_cuboid	*create_cuboid(t_cuboid_data data, t_material material)
 {
@@ -62,51 +63,30 @@ void	get_face_height(int idx, double *size, t_cuboid_data data)
 	}
 }
 
+void	create_cuboid_normals(t_vec3 *uvw, t_cuboid_data data)
+{
+	uvw[0] = data.axis;
+	uvw[1] = data.u;
+	uvw[2] = data.v;
+	uvw[3] = vec_scale(-1, data.axis);
+	uvw[4] = vec_scale(-1, data.u);
+	uvw[5] = vec_scale(-1, data.v);
+}
+
 t_rect	*create_face(int idx, t_cuboid_data data, t_material material)
 {
 	t_rect_data	new_data;
 	t_rect		*new_rect;
+	t_vec3		uvw[6];
 	double		size[3];
 
 	get_face_height(idx, size, data);
+	create_cuboid_normals(uvw, data);
 	new_data.width = size[0];
 	new_data.height = size[1];
-	if (idx == 0)
-	{
-		new_data.axis = data.axis;
-		new_data.u = data.u;
-		new_data.v = data.v;
-	}
-	else if (idx == 3)
-	{
-		new_data.axis = vec_scale(-1, data.axis);
-		new_data.u = vec_scale(-1, data.u);
-		new_data.v = vec_scale(-1, data.v);
-	}
-	if (idx == 1)
-	{
-		new_data.axis = data.u;
-		new_data.u = data.v;
-		new_data.v = vec_scale(-1, data.axis);
-	}
-	else if (idx == 4)
-	{
-		new_data.axis = vec_scale(-1, data.u);
-		new_data.u = vec_scale(-1, data.v);
-		new_data.v = data.axis;
-	}
-	if (idx == 2)
-	{
-		new_data.axis = data.v;
-		new_data.u = vec_scale(-1, data.axis);
-		new_data.v = vec_scale(-1, data.u);
-	}
-	else if (idx == 5)
-	{
-		new_data.axis = vec_scale(-1, data.v);
-		new_data.u = data.axis;
-		new_data.v = data.u;
-	}
+	new_data.axis = uvw[idx % 6];
+	new_data.u = uvw[(idx + 1) % 6];
+	new_data.v = uvw[(idx + 2) % 6];
 	new_data.center = vec_add(data.center, vec_scale(size[2] * 0.5,
 				new_data.axis));
 	new_rect = create_cuboid_face(new_data, material);

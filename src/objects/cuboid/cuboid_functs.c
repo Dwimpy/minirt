@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cuboid.h"
+#include "rect.h"
+#include "shape.h"
 
 t_shapes	cuboid_get_name_override(t_shape *self)
 {
@@ -28,8 +30,24 @@ t_cuboid_data	*cuboid_get_data(t_cuboid *self)
 void	cuboid_destroy_override(t_shape *shape)
 {
 	t_cuboid	*cuboid;
+	t_rect		**faces;
+	t_shape 	*shape_face;
+	t_rect		*rect_face;
+	int 		i;
 
+	i = 0;
 	cuboid = cuboid_from_shape(shape);
+	faces = cuboid->data->faces;
+	while (i < 6)
+	{
+		shape_face = rect_to_shape(faces[i]);
+		rect_face = rect_from_shape(shape_face);
+		free(shape_face->shape_info);
+		free(shape_face->shape_data);
+		free(faces[i]);
+		i++;
+	}
+	free(cuboid->data->faces);
 	free(shape->shape_data);
 	free(shape->shape_info);
 	free(cuboid);

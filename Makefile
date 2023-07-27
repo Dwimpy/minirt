@@ -13,14 +13,14 @@
 # Variables
 NAME			= minirt
 
-VPATH			= ./src/vector ./src/transform ./src/scene ./src/camera ./src/quaternion \
+VPATH			= ./src/vec3 ./src/transform ./src/scene ./src/camera ./src/quaternion \
 				  ./src/scene ./src/logger ./src/tester ./src/ray ./src/color \
 				  ./src/image ./src/hit_record ./src/sampler ./src/objects/sphere \
 				  ./src/objects/shape ./src/materials ./src/objects/cylinder ./src/objects/plane \
 				  ./src/objects/disk ./src/objects/rect ./src/objects/cuboid
 # Includes
 INCLUDE			= -I include/ -I libft-printf/include/ -I MLX42/include/MLX42/ 
-INCLUDE			+= -I ./src/vector
+INCLUDE			+= -I ./src/vec3
 INCLUDE			+= -I ./src/transform
 INCLUDE			+= -I ./src/camera
 INCLUDE			+= -I ./src/quaternion
